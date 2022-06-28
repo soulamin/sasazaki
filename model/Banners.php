@@ -107,7 +107,7 @@ switch ($acao) {
 
     case 'Busca_Banner':
 
-        $stmt = $pdo->prepare('SELECT * FROM baners');
+        $stmt = $pdo->prepare('SELECT * FROM banners');
         $executa = $stmt->execute();
         $Banners = array();
 
@@ -182,7 +182,7 @@ switch ($acao) {
 
         $idbanner = $_POST['idbanner'];
         $status = "d"; //desativado
-        $sql_desativa = "UPDATE Baners SET status = :status  WHERE id = :idbanner";
+        $sql_desativa = "UPDATE banners SET status = :status  WHERE id = :idbanner";
         $stmt = $pdo->prepare($sql_desativa);
         $stmt->bindParam(':idbanner', $idbanner);
         $stmt->bindParam(':status', $status);

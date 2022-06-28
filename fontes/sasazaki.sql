@@ -17463,10 +17463,10 @@ CREATE TABLE `sessaoview` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `totem_tem_baners`
+-- Estrutura da tabela `totem_tem_banners`
 --
 
-CREATE TABLE `totem_tem_baners` (
+CREATE TABLE `totem_tem_banners` (
   `fk_totem_id` int(11) NOT NULL,
   `fk_baner_id` int(11) NOT NULL,
   `prioridade` int(11) NOT NULL

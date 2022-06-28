@@ -24,7 +24,7 @@
 $(document).ready(function(){
    // Cache.delete();
     Valida();
-    $("input[type=text]").val($(this).val().toUpperCase());
+    $( "input[type='search']" ).val("");
     $('.selectmultiplo').select2({theme:"classic"});
  });
 

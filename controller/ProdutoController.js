@@ -157,11 +157,8 @@ function Busca_Produto() {
         for (var i = 0; i < data['Html'].length; i++) {
 
             
-
-
-
             tabelaBuscaProduto.row.add([data['Html'][i]['CodigoProduto'],data['Html'][i]['CodigoSasazaki'],
-            data['Html'][i]['CodigoSKUPai'],data['Html'][i]['Descricao'],data['Html'][i]['CodigoLinha'],
+            data['Html'][i]['Descricao'],data['Html'][i]['CodigoSKUPai'],data['Html'][i]['CodigoLinha'],
             data['Html'][i]['NomeLinha'],data['Html'][i]['Largura'],data['Html'][i]['Altura'],data['Html'][i]['Fotos']]);
         }
         tabelaBuscaProduto.draw();

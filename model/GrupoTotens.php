@@ -39,7 +39,7 @@ switch ($acao) {
                 $idgrupototem = $pdo->lastInsertId();
                 foreach ($Totens as $idtotem) {
                    
-                    $sql_insert2 = "INSERT INTO  grupoxtotens (id_grupo,id_totens)
+                    $sql_insert2 = "INSERT INTO  grupo_totens (id_grupo,id_totens)
                                                         VALUES
                                                              (:id_grupo,:id_totens)";
                     // Prepara uma senten�a para ser executada                                               
@@ -80,7 +80,7 @@ switch ($acao) {
 
         if ((!empty($login)) && (!empty($email)) && (!empty($email))) {
 
-            $sql_update = "UPDATE  Totens SET login = :login ,email = :email , WHERE id = :idToten";
+            $sql_update = "UPDATE  totens SET login = :login ,email = :email , WHERE id = :idToten";
 
             // Prepara uma senten�a para ser executada
             $statement = $pdo->prepare($sql_update);
@@ -145,7 +145,7 @@ switch ($acao) {
            
             $idgrupototens = $linha['idgrupototens'];
 
-            $stmtmu = $pdo->prepare('SELECT nome_da_loja  FROM grupoxtotens g
+            $stmtmu = $pdo->prepare('SELECT nome_da_loja  FROM grupo_totens g
                                                    INNER JOIN lojas l ON l.totem_id=g.id_totens WHERE g.id_grupo =:idgrupototens');
             $stmtmu->bindParam(":idgrupototens", $idgrupototens);
             $stmtmu->execute();

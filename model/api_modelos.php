@@ -29,12 +29,12 @@ foreach ($dd as $dados) {
     $inf = $dados;
     json_encode($inf);
 
-    echo  $nomemodelo = $inf->{'nome-modelo'};
-    echo  $codmodelo = $inf->{'cod-modelo'};
-    echo  $descmodelo = $inf->{'desc-modelo'};
-    echo  $coddiferencial = $inf->{'cod-diferencial'};
-    echo  $codcategoria = $inf->{'cod-categoria'};
-    echo '<hr>';
+      $nomemodelo = $inf->{'nome-modelo'};
+      $codmodelo = $inf->{'cod-modelo'};
+      $descmodelo = $inf->{'desc-modelo'};
+      $coddiferencial = $inf->{'cod-diferencial'};
+      $codcategoria = $inf->{'cod-categoria'};
+    
 
     /* Verifica se ja existe codigo cadastrado */
     $sql_select = "SELECT COUNT(descricao_modelo) AS qtd FROM modelos WHERE codigo_modelo = :codigo_modelo";
@@ -43,7 +43,8 @@ foreach ($dd as $dados) {
     $stverifica->execute();
     $linha =  $stverifica->fetch();
 
-    if ($linha['qtd'] === 0) {
+    if ($linha['qtd'] == 0) {
+
         $sql_insert = "INSERT INTO modelos(codigo_modelo,nome_modelo, descricao_modelo, codigo_diferencial, codigo_categoria) 
                          VALUES (:codigo_modelo,:nome_modelo, :descricao_modelo, :codigo_diferencial, :codigo_categoria) ";
 
@@ -65,14 +66,15 @@ foreach ($dd as $dados) {
             $cod_error = 1;
             $msg = " Usuário já Cadastro!";
         }
-    } else {
-    }
 
-    $sql_insert = "INSERT INTO modelos(codigo_modelo,nome_modelo, descricao_modelo, codigo_diferencial, codigo_categoria) 
-                             VALUES (:codigo_modelo,:nome_modelo, :descricao_modelo, :codigo_diferencial, :codigo_categoria) ";
+    } else {
+    
+
+    $sql_update = "UPDATE modelos SET nome_modelo=:nome_modelo, descricao_modelo=:descricao_modelo,
+                        codigo_diferencial= :codigo_diferencial, codigo_categoria=:codigo_categoria WHERE codigo_modelo=:codigo_modelo";
 
     // Prepara uma senten�a para ser executada                                               
-    $statement = $pdo->prepare($sql_insert);
+    $statement = $pdo->prepare($sql_update);
 
     $statement->bindParam(':codigo_modelo', $codmodelo);
     $statement->bindParam(':nome_modelo', $nomemodelo);
@@ -84,12 +86,11 @@ foreach ($dd as $dados) {
     if ($statement->execute()) {
         // Definimos a mensagem de sucesso
         $cod_error = 0;
-        $msg = "Cadastro Realizado com Sucesso!";
+        $msg = "Atualização Realizado com Sucesso!";
     } else {
         $cod_error = 1;
         $msg = " Usuário já Cadastro!";
     }
-
-    echo $msg . '<br>';
 }
-/* var_dump($dd); */
+}
+echo $msg;

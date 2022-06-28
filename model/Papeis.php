@@ -36,7 +36,7 @@ switch ($acao) {
 
                 foreach($funcao as $fn){
                     $prioridade = 0 ;
-                    $sql_ins = "INSERT INTO  permissaoxfuncao (idpermissao,idfuncao,prioridade)
+                    $sql_ins = "INSERT INTO  permissao_funcao (idpermissao,idfuncao,prioridade)
                                                   VALUES
                                                               (:idpermissao,:idfuncao,:prioridade)";
                     // Prepara uma senten�a para ser executada                                               
@@ -119,7 +119,7 @@ switch ($acao) {
                $idpermissao = $linha['id'];
 
                $st = $pdo->prepare('SELECT *  FROM funcao f
-                                              INNER JOIN  permissaoxfuncao p ON f.id=p.idfuncao WHERE 
+                                              INNER JOIN  permissao_funcao p ON f.id=p.idfuncao WHERE 
                                              p.idpermissao = :idpermissao');
                 $st->bindParam(":idpermissao",$idpermissao);
                 $st->execute();

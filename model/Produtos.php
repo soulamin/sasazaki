@@ -146,7 +146,7 @@ switch ($acao) {
 
         $idProduto = $_POST['idProduto'];
         $status = "d"; //desativado
-        $sql_desativa = "UPDATE Baners SET status = :status  WHERE id = :idProduto";
+        $sql_desativa = "UPDATE banners SET status = :status  WHERE id = :idProduto";
         $stmt = $pdo->prepare($sql_desativa);
         $stmt->bindParam(':idProduto', $idProduto);
         $stmt->bindParam(':status', $status);
