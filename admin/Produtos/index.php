@@ -70,12 +70,16 @@
                             <div class="col-md-12">
                                 <br>
                                 <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaProdutos">
-                                    <thead class="bg-primary-gradient text-smYYYTYY">
-                                        <th>Nome</th>
-                                        <th>Login</th>
-                                        <th>Tipo</th>
-                                        <th>Status</th>
-                                        <th>Ação</th>
+                                    <thead class="bg-primary-gradient text-sm">
+                                        <th> Código Produto</th>
+                                        <th>Código Sasazaki</th>
+                                        <th>Descrição</th>
+                                        <th>Código SKU Pai</th>
+                                        <th>Código Linha</th>
+                                        <th>Nome Linha</th>
+                                        <th>Largura</th>
+                                        <th>Altura</th>
+                                        <th>Fotos</th>
                                     </thead>
                                     <tbody id="conteudotabela">
                                     </tbody>
@@ -126,7 +130,6 @@
                                         <div class="col-md-4">
                                             <label>Tipo </label>
                                             <select class="form-control TipoProduto text-uppercase" name="Txt_Tipo">
-
                                                 <option value="A" selected>Administrador</option>
                                                 <option value="U">Produto</option>
                                             </select>
@@ -144,13 +147,9 @@
                     </div>
                 </div>
                 <!-- Modal -->
-
-
                 <!-----------------------------------FIM FORMULARIO EDITAR------------------------------------------------------>
-
-
                 <?php
                 $hr = time();
                 include '../layout/footer.php';
-                echo '<script src="../../controller/ProdutoControllerv3.js?'.$hr.'"></script>';
+                echo '<script src="../../controller/ProdutoController.js?'.$hr.'"></script>';
                 ?>

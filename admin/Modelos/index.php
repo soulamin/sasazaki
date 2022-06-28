@@ -18,16 +18,13 @@
                             </div> -->
                             <div class="col-md-12 table-responsive text-sm"><br>
 
-                                <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaBanners">
+                                <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaModelos">
                                     <thead class="bg-primary-gradient text-sm">
-
-                                       
-                                        <th>Id</th>
+                                        <th>Nome </th>
                                         <th>Código Moodelo </th>
                                         <th>Descricao Modelo</th>
                                         <th>Código Diferencial </th>
-                                        <th>Código_Categoria</th>
-                                        
+                                        <th>Código Categoria</th>
                                     </thead>
                                     <tbody id="conteudotabela">
                                     </tbody>
@@ -41,7 +38,7 @@
 
             <!--...................................Modal.......................................-->
 
-            <div class="modal fade" id="ModalIncluirBanner" tabindex="-1" role="dialog">
+            <div class="modal fade" id="ModalIncluirModelo" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
@@ -52,7 +49,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <form id="FrmSalvarBanner" method="post" action="" enctype="multipart/form-data">
+                                <form id="FrmSalvarModelo" method="post" action="" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Título</label>
@@ -108,11 +105,11 @@
                 </div>
             </div>
             <!-------------------------------MODAL------------------------------------------------------------------->
-            <div class="modal fade" id="ModalEditarBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel56" aria-hidden="true">
+            <div class="modal fade" id="ModalEditarModelo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel56" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
-                            <h5 class="modal-title" id="exampleModalLabel56">Alterar Banner </h5>
+                            <h5 class="modal-title" id="exampleModalLabel56">Alterar Modelo </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -120,7 +117,7 @@
                         <div class="modal-body">
 
                             <div class="row">
-                            <form id="FrmAlterarBanner" method="post" action="" enctype="multipart/form-data">
+                            <form id="FrmAlterarModelo" method="post" action="" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Título</label>
@@ -178,5 +175,5 @@
             <?php
             $hr = time();
             include '../layout/footer.php';
-            echo '<script src="../../controller/BannerController.js?' . $hr . '"></script>';
+            echo '<script src="../../controller/ModeloController.js?' . $hr . '"></script>';
             ?>

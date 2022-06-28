@@ -5,7 +5,7 @@
  *
  *
  =======================================================================================*/
-var tabelaBuscaModelo = null;
+var tabelaBuscaProduto = null;
 
 $(".Telefone").inputmask("(99)9999-9999");
 $(".Cpf").inputmask("999.999.999-99");
@@ -29,15 +29,15 @@ $("#txtDataAte").inputmask("99/99/9999");
 //inicializa a tabela
 $(document).ready(function() {
 	instanciaTabelaBusca();
-    Busca_Modelo();
+    Busca_Produto();
 	});
 
 //Botão para Editar Cliente
 $(document).off("click", "#btnEditar");
 $(document).on("click", "#btnEditar", function() {
-	
-	$('#ModalEditarModelo').modal('show');
-	Formulario_Modelo($(this).attr("codigo"));
+	$(".msg").empty();
+	$('#ModalEditarProduto').modal('show');
+	BuscaProdutoFormulario($(this).attr("codigo"));
 });
 
 //Botão para Rseset Senha
@@ -48,7 +48,7 @@ $(document).on("click", "#btnResetarSenha", function() {
     }
 });
 
-//Botão para Excluir Modelo
+//Botão para Excluir Produto
 $(document).off("click", "#btnDesativar");
 $(document).on("click", "#btnDesativar", function() {
 	Swal.fire({
@@ -64,7 +64,7 @@ $(document).on("click", "#btnDesativar", function() {
         cancelButtonText: 'Não',
       }).then((result) => {
         if (result.isConfirmed) {
-			Desativa_Modelo($(this).attr("codigo"))
+			Desativa_Produto($(this).attr("codigo"))
         }
       })
 			
@@ -79,19 +79,20 @@ $("#Txt_Mostra").on("ifToggled",function() {
 //Botão para Salvar Cadastro
 $(document).off("click", "#btnSalvar");
 $(document).on("click", "#btnSalvar", function() {
-	Salva_Modelo();
+	Salva_Produto();
 });
 
 //Botão para Alterar Cadastro
 $(document).off("click", "#btnAlterar");
 $(document).on("click", "#btnAlterar", function() {
-	Altera_Modelo();
+	Altera_Produto();
 });
 
 //Botão para  formulario incluir Empresa
-$(document).off("click", "#btnModelo");
-$(document).on("click", "#btnModelo", function() {
-	$('#ModalIncluirModelo').modal('show');
+$(document).off("click", "#btnProduto");
+$(document).on("click", "#btnProduto", function() {
+	$('#ModalIncluirProduto').modal('show');
+	Combobox_GrupoTotens();
 });
 
 //Botão para Retornar
@@ -109,11 +110,11 @@ $(document).on("click", "#btnRetornar", function() {
  =======================================================================================*/
 function instanciaTabelaBusca() {
 
-	if (tabelaBuscaModelo != null) {
-		tabelaBuscaModelo.destroy();
-		tabelaBuscaModelo = null;
+	if (tabelaBuscaProduto != null) {
+		tabelaBuscaProduto.destroy();
+		tabelaBuscaProduto = null;
 	} else {
-		tabelaBuscaModelo = $('#TabelaModelos').DataTable({
+		tabelaBuscaProduto = $('#TabelaProdutos').DataTable({
 			"language": {
 				"url": "https://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
 			},
@@ -129,34 +130,41 @@ function instanciaTabelaBusca() {
 }
 
 
-function Formulario_Modelo(idModelo) {
+function Formulario_Produto(idProduto) {
 
-	$.post("../../model/Modelos.php", {
-		acao : 'Formulario_Modelo',
-		idModelo: idModelo
+	$.post("../../model/Produtos.php", {
+		acao : 'Formulario_Produto',
+		idProduto: idProduto
 	}, function(data) {
-	$('#ModalEditarModelo').modal("show");
+	$('#ModalAlterarProduto').modal("show");
+    $("#btnResetarSenha").attr("C",data['Html']['Codigo']);
 	$('#atxt_codigo').val(data['Html']['Codigo']);
-    $('#atxt_nome').val(data['Html']['Nome']);
-	$('#atxt_funcao').val(data['Html']['Funcao']);
+    $('#atxt_login').val(data['Html']['Login']);
+	$('#atxt_email').val(data['Html']['Email']);
 
 	}, "json");
 
 }
 
-//busca para colocar na tabela de Modelos
-function Busca_Modelo() {
+//busca para colocar na tabela de Produtos
+function Busca_Produto() {
 
-	$.post("../../model/Modelos.php", {
-		acao : 'Busca_Modelo',
+	$.post("../../model/Produtos.php", {
+		acao : 'Busca_Produto',
 
 	}, function(data) {
-        tabelaBuscaModelo.clear();
+        tabelaBuscaProduto.clear();
         for (var i = 0; i < data['Html'].length; i++) {
-            tabelaBuscaModelo.row.add([data['Html'][i]['Nome'],data['Html'][i]['Codigo'],
-			data['Html'][i]['Descricao'],data['Html'][i]['Diferencial'],data['Html'][i]['Categoria']]);
+
+            
+
+
+
+            tabelaBuscaProduto.row.add([data['Html'][i]['CodigoProduto'],data['Html'][i]['CodigoSasazaki'],
+            data['Html'][i]['CodigoSKUPai'],data['Html'][i]['Descricao'],data['Html'][i]['CodigoLinha'],
+            data['Html'][i]['NomeLinha'],data['Html'][i]['Largura'],data['Html'][i]['Altura'],data['Html'][i]['Fotos']]);
         }
-        tabelaBuscaModelo.draw();
+        tabelaBuscaProduto.draw();
     }, "json");
 	}
 
@@ -183,35 +191,32 @@ function CheckRadioPersonalizado(){
 		});
 }
 
-//função para cadastrar Modelo
-function Salva_Modelo() {
+//função para cadastrar Produto
+function Salva_Produto() {
 
-	$('#FrmSalvarModelo').ajaxForm({
-		url : '../../model/Modelos.php',
+	$('#FrmSalvarProduto').ajaxForm({
+		url : '../../model/Produtos.php',
 		data : {
-			acao : 'Salva_Modelo'
+			acao : 'Salva_Produto'
 		},
 		dataType : 'json',
 		success : function(data) {
 			if (data['cod_error'] == 0) {
 				limpacampos();
-				msgalerta("",data['msg'],"success");
-				$('#ModalIncluirModelo').modal('hide');
-				Busca_Modelo();
-			}else{
-				msgalerta("Atenção",data['msg'],"warning");
+				$('#ModalIncluirProduto').modal('hide');
+				Busca_Produto();
 			}
-			
+			$('.msg').html(data['Html']);
 		}
 	});
 
 }
 
-function ResetarSenha(idModelo){
+function ResetarSenha(idProduto){
 
-    $.post("../../model/Modelos.php", {
+    $.post("../../model/Produtos.php", {
         acao : 'Resetar_Senha',
-        idModelo : idModelo
+        idProduto : idProduto
     }, function(data) {
         if(data['Cod_error']==0){
           alert("Senha Redefinida para 12345");
@@ -220,36 +225,47 @@ function ResetarSenha(idModelo){
 
 }
 
-//função para Alterar Modelo
-function Altera_Modelo(){
-	$('#FrmAlterarModelo').ajaxForm({
-		url : '../../model/Modelos.php',
-		data : {
-			acao : 'Altera_Modelo'
-		},
-		dataType : 'json',
-		success : function(data) {
-			if (data['cod_error'] == 0) {
-				limpacampos();
-				msgalerta("",data['msg'],"success");
-				$('#ModalEditarModelo').modal('hide');
-				Busca_Modelo();
-			}else{
-				msgalerta("Atenção",data['msg'],"warning");
-			}	
+//função para Alterar Produto
+function Altera_Produto(){
+
+	$.post("../../model/Produtos.php", {
+		acao : 'Altera_Produto',
+		ATxt_Codigo	    : $('#ATxt_Codigo').val(),
+		ATxt_Nome  		: $('#ATxt_Nome').val(),
+		ATxt_Login 		: $('#ATxt_Login').val(),
+		ATxt_Tipo 		: $('#ATxt_Tipo').val(),
+		ATxt_Telefone 	: $('#ATxt_Telefone').val(),
+		ATxt_Celular 	: $('#ATxt_Celular').val(),
+		ATxt_Cpf     	: $('#ATxt_Cpf').val(),
+		ATxt_Email 	    : $('#ATxt_Email').val()
+      
+	}, function(data) {
+		if (data['cod_error'] == 0) {
+			$('#ModalAlterarProduto').modal("hide");
+			limpacampos();
+			Busca_Produto();
 		}
-	});
+	}, "json");
+
 }
 
-function Desativa_Modelo(idModelo){
+function Desativa_Produto(idProduto){
 
-	$.post("../../model/Modelos.php", {
-		acao : 'Desativa_Modelo',
-        idModelo : idModelo
+	$.post("../../model/Produtos.php", {
+		acao : 'Desativa_Produto',
+        idProduto : idProduto
 	}, function(data) {
 			if(data['cod_error']==0){
-				Busca_Modelo();
+				Busca_Produto();
 			}
 	}, "json");
 
+}
+
+function Combobox_GrupoTotens() {
+	$.post('../../model/GrupoTotens.php', {
+		acao : 'Combobox_GrupoTotens'
+	}, function(data) {
+		$('.grupototens').html(data['Html']);
+	}, "json");
 }
