@@ -6,22 +6,23 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Ambientes</h3>
+                        <h3 class="card-title">Linhas</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
 
                         <div class="row">
                             <!-- <div class="col-md-12 text-right">
-                                <button class="btn btn-md btn-primary" id="btnAmbiente">
-                                    <i class="fa fa-plus"></i> Cadastro de Ambiente</button>
+                                <button class="btn btn-md btn-primary" id="btnBanner">
+                                    <i class="fa fa-plus"></i> Cadastro de Banner</button>
                             </div> -->
                             <div class="col-md-12 table-responsive text-sm"><br>
 
-                                <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaAmbientes">
+                                <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaLinhas">
                                     <thead class="bg-primary-gradient text-sm">
-                                        <th>Código Ambiente</th>
-                                        <th>Nome Ambiente </th>
+                                        <th>Código Linha</th>
+                                        <th>Nome Linha </th>
+                                        <th>Conceito </th>
                                     </thead>
                                     <tbody id="conteudotabela">
                                     </tbody>
@@ -35,18 +36,18 @@
 
             <!--...................................Modal.......................................-->
 
-            <div class="modal fade" id="ModalIncluirAmbiente" tabindex="-1" role="dialog">
+            <div class="modal fade" id="ModalIncluirBanner" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
-                            <h5 class="modal-title">Cadastro de Ambientes </h5>
+                            <h5 class="modal-title">Cadastro de Linhas </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <form id="FrmSalvarAmbiente" method="post" action="" enctype="multipart/form-data">
+                                <form id="FrmSalvarBanner" method="post" action="" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Título</label>
@@ -102,11 +103,11 @@
                 </div>
             </div>
             <!-------------------------------MODAL------------------------------------------------------------------->
-            <div class="modal fade" id="ModalEditarAmbiente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel56" aria-hidden="true">
+            <div class="modal fade" id="ModalEditarBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel56" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
-                            <h5 class="modal-title" id="exampleModalLabel56">Alterar Ambiente </h5>
+                            <h5 class="modal-title" id="exampleModalLabel56">Alterar Banner </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -114,7 +115,7 @@
                         <div class="modal-body">
 
                             <div class="row">
-                            <form id="FrmAlterarAmbiente" method="post" action="" enctype="multipart/form-data">
+                            <form id="FrmAlterarBanner" method="post" action="" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Título</label>
@@ -172,5 +173,5 @@
             <?php
             $hr = time();
             include '../layout/footer.php';
-            echo '<script src="../../controller/AmbienteController.js?' . $hr . '"></script>';
+            echo '<script src="../../controller/LinhaController.js?' . $hr . '"></script>';
             ?>

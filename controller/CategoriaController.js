@@ -5,7 +5,7 @@
  *
  *
  =======================================================================================*/
-var tabelaBuscaAmbiente = null;
+var tabelaBuscaCategoria = null;
 
 $(".Telefone").inputmask("(99)9999-9999");
 $(".Cpf").inputmask("999.999.999-99");
@@ -29,15 +29,15 @@ $("#txtDataAte").inputmask("99/99/9999");
 //inicializa a tabela
 $(document).ready(function() {
 	instanciaTabelaBusca();
-    Busca_Ambiente();
+    Busca_Categoria();
 	});
 
 //Botão para Editar Cliente
 $(document).off("click", "#btnEditar");
 $(document).on("click", "#btnEditar", function() {
 	
-	$('#ModalEditarAmbiente').modal('show');
-	Formulario_Ambiente($(this).attr("codigo"));
+	$('#ModalEditarCategoria').modal('show');
+	Formulario_Categoria($(this).attr("codigo"));
 });
 
 //Botão para Rseset Senha
@@ -48,7 +48,7 @@ $(document).on("click", "#btnResetarSenha", function() {
     }
 });
 
-//Botão para Excluir Ambiente
+//Botão para Excluir Categoria
 $(document).off("click", "#btnDesativar");
 $(document).on("click", "#btnDesativar", function() {
 	Swal.fire({
@@ -64,7 +64,7 @@ $(document).on("click", "#btnDesativar", function() {
         cancelButtonText: 'Não',
       }).then((result) => {
         if (result.isConfirmed) {
-			Desativa_Ambiente($(this).attr("codigo"))
+			Desativa_Categoria($(this).attr("codigo"))
         }
       })
 			
@@ -79,19 +79,19 @@ $("#Txt_Mostra").on("ifToggled",function() {
 //Botão para Salvar Cadastro
 $(document).off("click", "#btnSalvar");
 $(document).on("click", "#btnSalvar", function() {
-	Salva_Ambiente();
+	Salva_Categoria();
 });
 
 //Botão para Alterar Cadastro
 $(document).off("click", "#btnAlterar");
 $(document).on("click", "#btnAlterar", function() {
-	Altera_Ambiente();
+	Altera_Categoria();
 });
 
 //Botão para  formulario incluir Empresa
-$(document).off("click", "#btnAmbiente");
-$(document).on("click", "#btnAmbiente", function() {
-	$('#ModalIncluirAmbiente').modal('show');
+$(document).off("click", "#btnCategoria");
+$(document).on("click", "#btnCategoria", function() {
+	$('#ModalIncluirCategoria').modal('show');
 });
 
 //Botão para Retornar
@@ -109,11 +109,11 @@ $(document).on("click", "#btnRetornar", function() {
  =======================================================================================*/
 function instanciaTabelaBusca() {
 
-	if (tabelaBuscaAmbiente != null) {
-		tabelaBuscaAmbiente.destroy();
-		tabelaBuscaAmbiente = null;
+	if (tabelaBuscaCategoria != null) {
+		tabelaBuscaCategoria.destroy();
+		tabelaBuscaCategoria = null;
 	} else {
-		tabelaBuscaAmbiente = $('#TabelaAmbientes').DataTable({
+		tabelaBuscaCategoria = $('#TabelaCategorias').DataTable({
 			"language": {
 				"url": "https://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
 			},
@@ -129,13 +129,13 @@ function instanciaTabelaBusca() {
 }
 
 
-function Formulario_Ambiente(idAmbiente) {
+function Formulario_Categoria(idCategoria) {
 
-	$.post("../../model/Ambientes.php", {
-		acao : 'Formulario_Ambiente',
-		idAmbiente: idAmbiente
+	$.post("../../model/Categorias.php", {
+		acao : 'Formulario_Categoria',
+		idCategoria: idCategoria
 	}, function(data) {
-	$('#ModalEditarAmbiente').modal("show");
+	$('#ModalEditarCategoria').modal("show");
 	$('#atxt_codigo').val(data['Html']['Codigo']);
     $('#atxt_nome').val(data['Html']['Nome']);
 	$('#atxt_funcao').val(data['Html']['Funcao']);
@@ -144,18 +144,18 @@ function Formulario_Ambiente(idAmbiente) {
 
 }
 
-//busca para colocar na tabela de Ambientes
-function Busca_Ambiente() {
+//busca para colocar na tabela de Categorias
+function Busca_Categoria() {
 
-	$.post("../../model/Ambientes.php", {
-		acao : 'Busca_Ambiente',
+	$.post("../../model/Categorias.php", {
+		acao : 'Busca_Categoria',
 
 	}, function(data) {
-        tabelaBuscaAmbiente.clear();
+        tabelaBuscaCategoria.clear();
         for (var i = 0; i < data['Html'].length; i++) {
-            tabelaBuscaAmbiente.row.add([data['Html'][i]['Codigo'],data['Html'][i]['Nome']]);
+            tabelaBuscaCategoria.row.add([data['Html'][i]['Codigo'],data['Html'][i]['Nome']]);
         }
-        tabelaBuscaAmbiente.draw();
+        tabelaBuscaCategoria.draw();
     }, "json");
 	}
 
@@ -182,21 +182,21 @@ function CheckRadioPersonalizado(){
 		});
 }
 
-//função para cadastrar Ambiente
-function Salva_Ambiente() {
+//função para cadastrar Categoria
+function Salva_Categoria() {
 
-	$('#FrmSalvarAmbiente').ajaxForm({
-		url : '../../model/Ambientes.php',
+	$('#FrmSalvarCategoria').ajaxForm({
+		url : '../../model/Categorias.php',
 		data : {
-			acao : 'Salva_Ambiente'
+			acao : 'Salva_Categoria'
 		},
 		dataType : 'json',
 		success : function(data) {
 			if (data['cod_error'] == 0) {
 				limpacampos();
 				msgalerta("",data['msg'],"success");
-				$('#ModalIncluirAmbiente').modal('hide');
-				Busca_Ambiente();
+				$('#ModalIncluirCategoria').modal('hide');
+				Busca_Categoria();
 			}else{
 				msgalerta("Atenção",data['msg'],"warning");
 			}
@@ -206,11 +206,11 @@ function Salva_Ambiente() {
 
 }
 
-function ResetarSenha(idAmbiente){
+function ResetarSenha(idCategoria){
 
-    $.post("../../model/Ambientes.php", {
+    $.post("../../model/Categorias.php", {
         acao : 'Resetar_Senha',
-        idAmbiente : idAmbiente
+        idCategoria : idCategoria
     }, function(data) {
         if(data['Cod_error']==0){
           alert("Senha Redefinida para 12345");
@@ -219,20 +219,20 @@ function ResetarSenha(idAmbiente){
 
 }
 
-//função para Alterar Ambiente
-function Altera_Ambiente(){
-	$('#FrmAlterarAmbiente').ajaxForm({
-		url : '../../model/Ambientes.php',
+//função para Alterar Categoria
+function Altera_Categoria(){
+	$('#FrmAlterarCategoria').ajaxForm({
+		url : '../../model/Categorias.php',
 		data : {
-			acao : 'Altera_Ambiente'
+			acao : 'Altera_Categoria'
 		},
 		dataType : 'json',
 		success : function(data) {
 			if (data['cod_error'] == 0) {
 				limpacampos();
 				msgalerta("",data['msg'],"success");
-				$('#ModalEditarAmbiente').modal('hide');
-				Busca_Ambiente();
+				$('#ModalEditarCategoria').modal('hide');
+				Busca_Categoria();
 			}else{
 				msgalerta("Atenção",data['msg'],"warning");
 			}	
@@ -240,14 +240,14 @@ function Altera_Ambiente(){
 	});
 }
 
-function Desativa_Ambiente(idAmbiente){
+function Desativa_Categoria(idCategoria){
 
-	$.post("../../model/Ambientes.php", {
-		acao : 'Desativa_Ambiente',
-        idAmbiente : idAmbiente
+	$.post("../../model/Categorias.php", {
+		acao : 'Desativa_Categoria',
+        idCategoria : idCategoria
 	}, function(data) {
 			if(data['cod_error']==0){
-				Busca_Ambiente();
+				Busca_Categoria();
 			}
 	}, "json");
 

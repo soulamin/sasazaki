@@ -5,7 +5,7 @@
  *
  *
  =======================================================================================*/
-var tabelaBuscaAmbiente = null;
+var tabelaBuscaLinha = null;
 
 $(".Telefone").inputmask("(99)9999-9999");
 $(".Cpf").inputmask("999.999.999-99");
@@ -29,15 +29,15 @@ $("#txtDataAte").inputmask("99/99/9999");
 //inicializa a tabela
 $(document).ready(function() {
 	instanciaTabelaBusca();
-    Busca_Ambiente();
+    Busca_Linha();
 	});
 
 //Botão para Editar Cliente
 $(document).off("click", "#btnEditar");
 $(document).on("click", "#btnEditar", function() {
 	
-	$('#ModalEditarAmbiente').modal('show');
-	Formulario_Ambiente($(this).attr("codigo"));
+	$('#ModalEditarLinha').modal('show');
+	Formulario_Linha($(this).attr("codigo"));
 });
 
 //Botão para Rseset Senha
@@ -48,7 +48,7 @@ $(document).on("click", "#btnResetarSenha", function() {
     }
 });
 
-//Botão para Excluir Ambiente
+//Botão para Excluir Linha
 $(document).off("click", "#btnDesativar");
 $(document).on("click", "#btnDesativar", function() {
 	Swal.fire({
@@ -64,7 +64,7 @@ $(document).on("click", "#btnDesativar", function() {
         cancelButtonText: 'Não',
       }).then((result) => {
         if (result.isConfirmed) {
-			Desativa_Ambiente($(this).attr("codigo"))
+			Desativa_Linha($(this).attr("codigo"))
         }
       })
 			
@@ -79,19 +79,19 @@ $("#Txt_Mostra").on("ifToggled",function() {
 //Botão para Salvar Cadastro
 $(document).off("click", "#btnSalvar");
 $(document).on("click", "#btnSalvar", function() {
-	Salva_Ambiente();
+	Salva_Linha();
 });
 
 //Botão para Alterar Cadastro
 $(document).off("click", "#btnAlterar");
 $(document).on("click", "#btnAlterar", function() {
-	Altera_Ambiente();
+	Altera_Linha();
 });
 
 //Botão para  formulario incluir Empresa
-$(document).off("click", "#btnAmbiente");
-$(document).on("click", "#btnAmbiente", function() {
-	$('#ModalIncluirAmbiente').modal('show');
+$(document).off("click", "#btnLinha");
+$(document).on("click", "#btnLinha", function() {
+	$('#ModalIncluirLinha').modal('show');
 });
 
 //Botão para Retornar
@@ -109,11 +109,11 @@ $(document).on("click", "#btnRetornar", function() {
  =======================================================================================*/
 function instanciaTabelaBusca() {
 
-	if (tabelaBuscaAmbiente != null) {
-		tabelaBuscaAmbiente.destroy();
-		tabelaBuscaAmbiente = null;
+	if (tabelaBuscaLinha != null) {
+		tabelaBuscaLinha.destroy();
+		tabelaBuscaLinha = null;
 	} else {
-		tabelaBuscaAmbiente = $('#TabelaAmbientes').DataTable({
+		tabelaBuscaLinha = $('#TabelaLinhas').DataTable({
 			"language": {
 				"url": "https://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json"
 			},
@@ -129,13 +129,13 @@ function instanciaTabelaBusca() {
 }
 
 
-function Formulario_Ambiente(idAmbiente) {
+function Formulario_Linha(idLinha) {
 
-	$.post("../../model/Ambientes.php", {
-		acao : 'Formulario_Ambiente',
-		idAmbiente: idAmbiente
+	$.post("../../model/Linhas.php", {
+		acao : 'Formulario_Linha',
+		idLinha: idLinha
 	}, function(data) {
-	$('#ModalEditarAmbiente').modal("show");
+	$('#ModalEditarLinha').modal("show");
 	$('#atxt_codigo').val(data['Html']['Codigo']);
     $('#atxt_nome').val(data['Html']['Nome']);
 	$('#atxt_funcao').val(data['Html']['Funcao']);
@@ -144,18 +144,19 @@ function Formulario_Ambiente(idAmbiente) {
 
 }
 
-//busca para colocar na tabela de Ambientes
-function Busca_Ambiente() {
+//busca para colocar na tabela de Linhas
+function Busca_Linha() {
 
-	$.post("../../model/Ambientes.php", {
-		acao : 'Busca_Ambiente',
+	$.post("../../model/Linhas.php", {
+		acao : 'Busca_Linha',
 
 	}, function(data) {
-        tabelaBuscaAmbiente.clear();
+        tabelaBuscaLinha.clear();
         for (var i = 0; i < data['Html'].length; i++) {
-            tabelaBuscaAmbiente.row.add([data['Html'][i]['Codigo'],data['Html'][i]['Nome']]);
+            tabelaBuscaLinha.row.add([data['Html'][i]['Codigo'],data['Html'][i]['Nome'],
+			data['Html'][i]['Conceito']]);
         }
-        tabelaBuscaAmbiente.draw();
+        tabelaBuscaLinha.draw();
     }, "json");
 	}
 
@@ -182,21 +183,21 @@ function CheckRadioPersonalizado(){
 		});
 }
 
-//função para cadastrar Ambiente
-function Salva_Ambiente() {
+//função para cadastrar Linha
+function Salva_Linha() {
 
-	$('#FrmSalvarAmbiente').ajaxForm({
-		url : '../../model/Ambientes.php',
+	$('#FrmSalvarLinha').ajaxForm({
+		url : '../../model/Linhas.php',
 		data : {
-			acao : 'Salva_Ambiente'
+			acao : 'Salva_Linha'
 		},
 		dataType : 'json',
 		success : function(data) {
 			if (data['cod_error'] == 0) {
 				limpacampos();
 				msgalerta("",data['msg'],"success");
-				$('#ModalIncluirAmbiente').modal('hide');
-				Busca_Ambiente();
+				$('#ModalIncluirLinha').modal('hide');
+				Busca_Linha();
 			}else{
 				msgalerta("Atenção",data['msg'],"warning");
 			}
@@ -206,11 +207,11 @@ function Salva_Ambiente() {
 
 }
 
-function ResetarSenha(idAmbiente){
+function ResetarSenha(idLinha){
 
-    $.post("../../model/Ambientes.php", {
+    $.post("../../model/Linhas.php", {
         acao : 'Resetar_Senha',
-        idAmbiente : idAmbiente
+        idLinha : idLinha
     }, function(data) {
         if(data['Cod_error']==0){
           alert("Senha Redefinida para 12345");
@@ -219,20 +220,20 @@ function ResetarSenha(idAmbiente){
 
 }
 
-//função para Alterar Ambiente
-function Altera_Ambiente(){
-	$('#FrmAlterarAmbiente').ajaxForm({
-		url : '../../model/Ambientes.php',
+//função para Alterar Linha
+function Altera_Linha(){
+	$('#FrmAlterarLinha').ajaxForm({
+		url : '../../model/Linhas.php',
 		data : {
-			acao : 'Altera_Ambiente'
+			acao : 'Altera_Linha'
 		},
 		dataType : 'json',
 		success : function(data) {
 			if (data['cod_error'] == 0) {
 				limpacampos();
 				msgalerta("",data['msg'],"success");
-				$('#ModalEditarAmbiente').modal('hide');
-				Busca_Ambiente();
+				$('#ModalEditarLinha').modal('hide');
+				Busca_Linha();
 			}else{
 				msgalerta("Atenção",data['msg'],"warning");
 			}	
@@ -240,14 +241,14 @@ function Altera_Ambiente(){
 	});
 }
 
-function Desativa_Ambiente(idAmbiente){
+function Desativa_Linha(idLinha){
 
-	$.post("../../model/Ambientes.php", {
-		acao : 'Desativa_Ambiente',
-        idAmbiente : idAmbiente
+	$.post("../../model/Linhas.php", {
+		acao : 'Desativa_Linha',
+        idLinha : idLinha
 	}, function(data) {
 			if(data['cod_error']==0){
-				Busca_Ambiente();
+				Busca_Linha();
 			}
 	}, "json");
 

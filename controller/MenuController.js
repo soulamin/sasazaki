@@ -65,24 +65,20 @@ $(document).on("click",'.btnAmbientes', function() {
       location.href ='../Ambientes/';
 });
 
-//Botão para Cliente
-$(document).off("click",'.btnRelatorio');
-$(document).on("click",'.btnRelatorio', function() {
-    location.href ='../Relatorios/';
+//Botão para btnLinhas
+$(document).off("click",'.btnLinhas');
+$(document).on("click",'.btnLinhas', function() {
+    location.href ='../Linhas/';
 });
 
 
-//Botão para LocalFiscal
-$(document).off("click",'.btnLocalFiscal');
-$(document).on("click",'.btnLocalFiscal', function() {
-    location.href ='../LocalFiscal/';
+//Botão para Categorias
+$(document).off("click",'.btnCategorias');
+$(document).on("click",'.btnCategorias', function() {
+    location.href ='../Categorias/';
 });
 
-//Botão para Gerenciar Tickts
-$(document).off("click",'.btnGerenciar');
-$(document).on("click",'.btnGerenciar', function() {
-    location.href ='../Gerenciar/';
-});
+
 
 //Botão para Log Digital
 $(document).off("click",'.btnTipoCliente');

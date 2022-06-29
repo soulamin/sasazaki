@@ -12,7 +12,7 @@ $acao = $_POST['acao'];
 
 switch ($acao) {
 
-    case 'Salva_Banner':
+    case 'Salva_Ambiente':
 
         // Filtra os dados e armazena em vari�veis (o filtro padr�o � FILTER_SANITIZE_STRING que remove tags HTML)
         $email = $_POST['txt_email'];
@@ -25,7 +25,7 @@ switch ($acao) {
 
         if ((!empty($email)) && (!empty($login)) && (!empty($senha))) {
 
-            $sql_insert = "INSERT INTO  Banners (login,senha,email,role,idpermissao,status)
+            $sql_insert = "INSERT INTO  Ambientes (login,senha,email,role,idpermissao,status)
                                                                                 VALUES
                                                                                 (:login ,:senha,:email,:role,:tipo,:status)";
             // Prepara uma senten�a para ser executada                                               
@@ -60,10 +60,10 @@ switch ($acao) {
         break;
 
 
-    case 'Altera_Banner':
+    case 'Altera_Ambiente':
 
         // Filtra os dados e armazena em vari�veis (o filtro padr�o � FILTER_SANITIZE_STRING que remove tags HTML)
-        $idBanner = $_POST['atxt_idBanner'];
+        $idAmbiente = $_POST['atxt_idAmbiente'];
         $email = $_POST['atxt_email'];
         $login = $_POST['atxt_login'];
         $senha = password_hash($_POST['atxt_senha'], PASSWORD_DEFAULT);
@@ -72,12 +72,12 @@ switch ($acao) {
 
         if ((!empty($login)) && (!empty($email)) && (!empty($email))) {
 
-            $sql_update = "UPDATE  Banners SET login = :login ,email = :email , WHERE id = :idBanner";
+            $sql_update = "UPDATE  Ambientes SET login = :login ,email = :email , WHERE id = :idAmbiente";
 
             // Prepara uma senten�a para ser executada
             $statement = $pdo->prepare($sql_update);
 
-            $statement->bindParam(':idBanner', $idBanner);
+            $statement->bindParam(':idAmbiente', $idAmbiente);
             $statement->bindParam(':nome', $Nome);
             $statement->bindParam(':login', $Login);
             $statement->bindParam(':celular',  $Celular);
@@ -105,86 +105,48 @@ switch ($acao) {
 
         break;
 
-    case 'Busca_Banner':
+    case 'Busca_Ambiente':
 
-        $stmt = $pdo->prepare('SELECT * FROM banners');
+        $stmt = $pdo->prepare('SELECT * FROM Ambientes');
         $executa = $stmt->execute();
-        $Banners = array();
+        $Ambientes = array();
 
         while ($linha = $stmt->fetch()) {
-
-                //verifica status
-                if ($linha['status'] == 'a') {
-
-                    $status = '<span class="badge badge-success">Ativo</span>';
-                    //botao Desativar
-                  
-
-                    //botao editar
-                    $botaodesativar = '<a class="dropdown-item" id="btnDesativar"  codigo ="' . $linha['id'] . '"  href="#">
-                    <i class="fa fa-trash"> Desativar </i> 
-                    </a>';
-
-                } else {
-
-                    $status = '<span class="badge badge-danger">Desativado</span>';
-                    //botao Desativar
-                    $botaodesativar = '';
-
-                }
-                //botao editar
-                $botaoeditar = '<a class="dropdown-item" id="btnEditar"  codigo ="' . $linha['id'] . '"  href="#">
-                <i class="fa fa-pencil"> Editar </i> 
-                </a>';
-
-
-            $botao =   '<div class="btn-group">
-                            <button type="button" class="btn btn-warning btn-sm">Ação</button>
-                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" role="menu">
-                            ' . $botaoeditar . '
-                            ' . $botaodesativar . '
-                            </div>
-                        </div>';
-
-
-            $U = array('Titulo' => $linha['titulo'], 'Texto' => $linha['texto'], 'Posicao' => $linha['posicao'],
-                     'Imagem' => $linha['imagem'] ,'Status' => $status, 'Html_Acao' => $botao);
-            array_push($Banners, $U);
+          
+           
+            $m = array('Nome' => $linha['nome_ambiente'], 'Codigo' => $linha['codigo_ambiente']);
+            array_push($Ambientes, $m);
         }
 
-        $Resultado['Html'] = $Banners;
+        $Resultado['Html'] = $Ambientes;
         echo json_encode($Resultado);
 
         break;
 
-    case 'Formulario_Banner':
+    case 'Formulario_Ambiente':
 
 
-        $stmt = $pdo->prepare('SELECT U.* FROM Banners U  WHERE idBanner LIKE :Banner');
-        $stmt->bindParam(':Banner', $Banner);
+        $stmt = $pdo->prepare('SELECT U.* FROM Ambientes U  WHERE idAmbiente LIKE :Ambiente');
+        $stmt->bindParam(':Ambiente', $Ambiente);
         $executa = $stmt->execute();
 
         while ($linha = $stmt->fetch()) {
-            $Banner = array(
+            $Ambiente = array(
                 'Nome' => $linha['nome'], 'Email' => $linha['email'], 'Login' => $linha['login'],
-                'Codigo' => $linha['idBanner']
+                'Codigo' => $linha['idAmbiente']
             );
         }
-        $Resultado['Html'] = $Banner;
+        $Resultado['Html'] = $Ambiente;
         echo json_encode($Resultado);
         break;
 
-    case 'Desativa_Banner':
+    case 'Desativa_Ambiente':
 
-        $idbanner = $_POST['idbanner'];
+        $idAmbiente = $_POST['idAmbiente'];
         $status = "d"; //desativado
-        $sql_desativa = "UPDATE banners SET status = :status  WHERE id = :idbanner";
+        $sql_desativa = "UPDATE banners SET status = :status  WHERE id = :idAmbiente";
         $stmt = $pdo->prepare($sql_desativa);
-        $stmt->bindParam(':idbanner', $idbanner);
+        $stmt->bindParam(':idAmbiente', $idAmbiente);
         $stmt->bindParam(':status', $status);
         if ($stmt->execute()) {
             $cod_error = 0;

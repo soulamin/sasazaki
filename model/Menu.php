@@ -208,8 +208,15 @@ switch ($acao) {
     <ul class="nav nav-treeview" style="display: none;">
         <li class="nav-item btnProdutos">
         <a href="#" class="nav-link ">
-        <i class="fa  fa-columns nav-icon"></i>
+        <i class="fa  fa-tags nav-icon"></i>
         <p>Lista Produtos</p>
+        </a>
+        </li>
+
+        <li class="nav-item btnCategorias">
+        <a href="#" class="nav-link">
+        <i class="fa fa-archive nav-icon "></i>
+        <p>Categorias </p>
         </a>
         </li>
 
@@ -220,10 +227,16 @@ switch ($acao) {
         </a>
         </li>
 
+        <li class="nav-item btnLinhas">
+        <a href="#" class="nav-link">
+        <i class="fa fa-archive nav-icon "></i>
+        <p>Linhas </p>
+        </a>
+        </li>
 
         <li class="nav-item btnModelos">
         <a href="#" class="nav-link">
-        <i class="fa fa-book nav-icon "></i>
+        <i class="fa fa-archive nav-icon "></i>
         <p>Modelos</p>
         </a>
         </li>
