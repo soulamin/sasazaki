@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Jun-2022 às 19:57
+-- Tempo de geração: 29-Jun-2022 às 23:38
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.0.19
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sasazaki`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `ambientes`
+--
+
+CREATE TABLE `ambientes` (
+  `id` int(11) NOT NULL,
+  `nome_ambiente` varchar(50) DEFAULT NULL,
+  `codigo_ambiente` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `ambientes`
+--
+
+INSERT INTO `ambientes` (`id`, `nome_ambiente`, `codigo_ambiente`) VALUES
+(1, 'Quarto', 'amb-0001'),
+(2, 'Área de Serviço', 'amb-0002'),
+(3, 'Fachada', 'amb-0003'),
+(4, 'Cozinha', 'amb-0004'),
+(5, 'Banheiro', 'amb-0005'),
+(6, 'Não se aplica', 'amb-0006'),
+(7, ' Cozinha', 'amb-0007'),
+(8, ' Banheiro', 'amb-0008'),
+(9, ' Sala', 'amb-0009'),
+(10, ' Quarto', 'amb-0010'),
+(11, ' Fachada', 'amb-0011');
 
 -- --------------------------------------------------------
 
@@ -162,9 +191,20 @@ CREATE TABLE `bannerxgrupototens` (
 CREATE TABLE `categorias` (
   `idcategoria` int(11) NOT NULL,
   `codigo_categoria` varchar(50) NOT NULL,
-  `nome_categoria` varchar(150) NOT NULL,
-  `data_cadastro` datetime NOT NULL DEFAULT current_timestamp()
+  `nome_categoria` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `categorias`
+--
+
+INSERT INTO `categorias` (`idcategoria`, `codigo_categoria`, `nome_categoria`) VALUES
+(2, 'cat-0001', 'Janela'),
+(3, 'cat-0002', 'Porta'),
+(4, 'cat-0003', 'Tela Mosquiteira'),
+(5, 'cat-0004', 'Junção'),
+(6, 'cat-0005', 'Guarnição'),
+(7, 'cat-0006', 'Produto de Limpeza');
 
 -- --------------------------------------------------------
 
@@ -7534,6 +7574,20 @@ INSERT INTO `estoque` (`cod_produto`, `loja_id`, `prioridade`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `fotos`
+--
+
+CREATE TABLE `fotos` (
+  `id` int(11) NOT NULL,
+  `tipo_foto` varchar(50) DEFAULT NULL,
+  `foto_principal` tinyint(1) DEFAULT NULL,
+  `caminho` varchar(255) DEFAULT NULL,
+  `codigo_foto` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `funcao`
 --
 
@@ -8253,6 +8307,38 @@ INSERT INTO `grupo_totens` (`idgrupoxtotens`, `id_grupo`, `id_totens`) VALUES
 (6, 2, 4),
 (7, 2, 6),
 (8, 2, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `linhas`
+--
+
+CREATE TABLE `linhas` (
+  `id` int(11) NOT NULL,
+  `codigo_linha` varchar(50) NOT NULL,
+  `nome_linha` varchar(600) DEFAULT NULL,
+  `conceito` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `linhas`
+--
+
+INSERT INTO `linhas` (`id`, `codigo_linha`, `nome_linha`, `conceito`) VALUES
+(1, 'Desenvolvida para quem preza a nobreza do alumínio', '', ''),
+(2, 'lin-0001', 'Prátika', '\"Sofisticação e segurança. A Linha Prátika apresenta a segurança do aço com a economia de tempo e mão de obra. Seus produtos são contemporâneos e prontos para instalação. '),
+(3, 'lin-0002', 'Kompacta', 'Compactos e resistentes. A Linha Kompacta foi desenvolvida para quem procura agilidade, economia e qualidade. São produtos simples e resistentes específicos para atender os principais ambientes de uma casa.'),
+(4, 'lin-0003', 'Silenfort', 'Robustez e personalização. A Linha Silenfort foi elaborada para trazer segurança e proteção. Seus produtos robustos e exclusivos são customizáveis e combinam com qualquer ambiente.'),
+(5, 'lin-0004', 'Belfort', 'Variedade e personalização. A Linha Belfort oferece produtos econômicos, versáteis e com uma grade variedade de modelos e medidas. Seus produtos são customizáveis e se adequam a diversos estilos.'),
+(6, 'lin-0005', 'Aluminium', '\"Sofisticação e tecnologia. A Linha Aluminium alia a sofisticação do alumínio com a tecnologia de vedação e resistência. '),
+(7, 'lin-0006', 'Alumifort', '\"Exclusividade e bom gosto. A Linha Alumifort oferece a maior variedade de modelos e medidas em esquadria de alumínio. '),
+(8, 'lin-0007', 'Alumifit', 'Funcionalidade e modernidade. A Linha Alumifit foi elaborada para atender projetos que focam em produtos funcionais, com visual clean, modernidade e qualidade. Sua inspiração vem do minimalismo e seus produtos foram desenvolvidos para pessoas modernas e práticas.'),
+(9, 'lin-0008', 'Alumislim', 'Economia e praticidade. A Linha Alumislim apresenta soluções econômicas, práticas e fáceis de limpar. Suas grades horizontais foram projetadas para fornecer praticidade no cotidiano. São modelos e medidas perfeitos para atender todos os cômodos de uma casa.'),
+(10, 'lin-0009', 'Saz Clean', 'Soluções em limpeza. A Linha Saz Clean foi desenvolvida para auxiliar na limpeza de esquadrias, vidros, grelhas e grills. É facil de aplicar, tem ótimo rendimento e deixa a superficie brilhando como nova.'),
+(11, 'lin-0010', 'Prátika Black', 'Sofisticação na cor e exclusividade nos detalhes. As esquadrias Prátika Black reúnem a robustez do aço e a sofisticação dos acessórios em um mix de produtos para atender o público mais exigente. Apresenta fechos embutidos e puxadores retos com acabamentos perfeitos que harmonizam com diversos tipos de projetos arquitetônicos, além de vidros instalados através e um exclusivo sistema de fixação, o kit vidro, que proporciona visual clean e moderno a todo ambiente.'),
+(12, 'Seu design moderno, é ideal para quem busca produt', '', ''),
+(13, 'Sua versão Black®, inspirada no estilo industrial ', '', '');
 
 -- --------------------------------------------------------
 
@@ -17463,10 +17549,10 @@ CREATE TABLE `sessaoview` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `totem_tem_banners`
+-- Estrutura da tabela `totem_tem_baners`
 --
 
-CREATE TABLE `totem_tem_banners` (
+CREATE TABLE `totem_tem_baners` (
   `fk_totem_id` int(11) NOT NULL,
   `fk_baner_id` int(11) NOT NULL,
   `prioridade` int(11) NOT NULL
@@ -19973,6 +20059,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Índices para tabela `ambientes`
+--
+ALTER TABLE `ambientes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `ambientes_uso`
 --
 ALTER TABLE `ambientes_uso`
@@ -19988,7 +20080,21 @@ ALTER TABLE `banners`
 -- Índices para tabela `categorias`
 --
 ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`idcategoria`);
+  ADD PRIMARY KEY (`idcategoria`),
+  ADD UNIQUE KEY `codigo_categoria` (`codigo_categoria`);
+
+--
+-- Índices para tabela `fotos`
+--
+ALTER TABLE `fotos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `linhas`
+--
+ALTER TABLE `linhas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo_linha` (`codigo_linha`);
 
 --
 -- Índices para tabela `modelos`
@@ -20009,22 +20115,40 @@ ALTER TABLE `produtos`
 --
 
 --
+-- AUTO_INCREMENT de tabela `ambientes`
+--
+ALTER TABLE `ambientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de tabela `fotos`
+--
+ALTER TABLE `fotos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `linhas`
+--
+ALTER TABLE `linhas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `modelos`
 --
 ALTER TABLE `modelos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=628;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=629;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
