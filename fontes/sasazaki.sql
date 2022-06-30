@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Jun-2022 às 23:38
+-- Tempo de geração: 30-Jun-2022 às 22:45
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.0.19
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sasazaki`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `acabamentos`
+--
+
+CREATE TABLE `acabamentos` (
+  `id` int(11) NOT NULL,
+  `codigo_acabamento` varchar(50) NOT NULL,
+  `tipo_acabamento` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `acabamentos`
+--
+
+INSERT INTO `acabamentos` (`id`, `codigo_acabamento`, `tipo_acabamento`) VALUES
+(1, 'aca-0001', 'Pintura de acabamento com esmalte acrílico na cor branca'),
+(2, 'aca-0002', 'Sem Pintura de Acabamento'),
+(3, 'aca-0003', 'Pintura eletrostática a pó na cor branca'),
+(4, 'aca-0004', 'Sistema Coil Coating na cor branca'),
+(5, 'aca-0005', 'Sistema Coil Coating na cor Madeira'),
+(6, 'aca-0006', 'Pintura eletrostática a pó na cor madeira'),
+(7, 'aca-0007', 'Não se aplica'),
+(8, 'aca-0008', 'Pintura de acabamento com esmalte acrílico na cor preta');
 
 -- --------------------------------------------------------
 
@@ -7497,6 +7523,174 @@ INSERT INTO `consultor` (`consultor_id`, `consultor_nome`, `consultor_telefone`,
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `diferenciais`
+--
+
+CREATE TABLE `diferenciais` (
+  `id` int(11) NOT NULL,
+  `descricao_diferencial` text DEFAULT NULL,
+  `codigo_diferencial` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `diferenciais`
+--
+
+INSERT INTO `diferenciais` (`id`, `descricao_diferencial`, `codigo_diferencial`) VALUES
+(1, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, sistema de regulagem de ventilação e iluminação, grade.', 'car-0001'),
+(2, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, sistema de regulagem de ventilação e iluminação, porta cadeado.', 'car-0002'),
+(3, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, grade.', 'car-0003'),
+(4, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, porta cadeado.', 'car-0004'),
+(5, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, 1 veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, 2 lados de abertura das folhas, grade.', 'car-0005'),
+(6, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, 1 veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, 2 lados de abertura das folhas.', 'car-0006'),
+(7, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, grade.', 'car-0007'),
+(8, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, porta cadeado.', 'car-0008'),
+(9, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, fecho de alumínio, 2 lados de abertura, grade.', 'car-0009'),
+(10, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, fecho de alumínio, 2 lados de abertura.', 'car-0010'),
+(11, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, veneziana ventilada, trinco de segurança, porta cadeado, fácil desencaixe da dobradiça para limpeza.', 'car-0011'),
+(12, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro mini boreal, veneziana na base da porta, maçaneta de alumínio.', 'car-0012'),
+(13, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, maçaneta de alumínio.', 'car-0013'),
+(14, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, trinco de segurança, porta cadeado, fácil desencaixe da dobradiça para limpeza.', 'car-0014'),
+(15, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro mini boreal, maçaneta de alumínio.', 'car-0015'),
+(16, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, fecho de alumínio, vidro mini boreal, grade.', 'car-0016'),
+(17, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro mini boreal, fecho de alumínio, grade.', 'car-0017'),
+(18, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro mini boreal, fecho de alumínio.', 'car-0018'),
+(19, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, puxador de aço inox, frisos de aço inox, fechadura Rolete, acompanha 3 chaves.', 'car-0019'),
+(20, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, soleira de aço inox, puxador de alumínio, fechadura bico-de-papagaio com pino de segurança.', 'car-0020'),
+(21, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro de segurança, soleira de aço inox, puxador de alumínio, fechadura bico-de-papagaio com pino de segurança, grade removível.', 'car-0021'),
+(22, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, soleira de aço inox, puxador embutido de aço inox, veneziana móvel ventilada, fechadura bico-de-papagaio com pino de segurança.', 'car-0022'),
+(23, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, soleira de aço inox, puxador de alumínio, fechadura com maçaneta de alumínio, sistema de regulagem de ventilação e iluminação, trava de segurança, maior vão livre.', 'car-0023'),
+(24, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, soleira de aço inox, fecho embutido de aço inox e puxador de alumínio, fechadura bico-de-papagaio com pino de segurança, sistema de regulagem de ventilação e iluminação', 'car-0024'),
+(25, 'Produto de aço galvanizado, tela removível de fácil instalação.', 'car-0025'),
+(26, 'Produto de aço, acabamento personalizável, permite composições horizontais.', 'car-0026'),
+(27, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, permite composições horizontais.', 'car-0027'),
+(28, 'Produto de aço, acabamento personalizável, fecho de alumínio, acompanha escovas de vedação, grade.', 'car-0028'),
+(29, 'Produto de aço, acabamento personalizável, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, sistema de regulagem de ventilação e iluminação, grade.', 'car-0029'),
+(30, 'Produto de aço, acabamento personalizável, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, sistema de regulagem de ventilação e iluminação, porta cadeado.', 'car-0030'),
+(31, 'Produto de aço, acabamento personalizável, veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, grade.', 'car-0031'),
+(32, 'Produto de aço, acabamento personalizável, veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, porta cadeado.', 'car-0032'),
+(33, 'Produto de aço, acabamento personalizável, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, grade.', 'car-0033'),
+(34, 'Produto de aço, acabamento personalizável, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, bandeira projetante com puxador de nylon, grade.', 'car-0034'),
+(35, 'Produto de aço, acabamento personalizável, puxador de nylon.', 'car-0035'),
+(36, 'Produto de aço, acabamento personalizável, puxador de aço inox, frisos de aço inox, fechadura Rolete, acompanha 3 chaves.', 'car-0036'),
+(37, 'Produto de aço, acabamento personalizável, almofada na base da porta, maçaneta de alumínio.', 'car-0037'),
+(38, 'Produto de aço, acabamento personalizável, maçaneta de alumínio.', 'car-0038'),
+(39, 'Produto de aço, acabamento personalizável, soleira de aço inox, puxador de alumínio, fechadura com maçaneta de alumínio, sistema de regulagem de ventilação e iluminação, trava de segurança, maior vão livre.', 'car-0039'),
+(40, 'Produto de aço, acabamento personalizável, trinco de segurança, porta cadeado, fácil desencaixe da dobradiça para limpeza.', 'car-0040'),
+(41, 'Produto de aço, acabamento personalizável, veneziana ventilada, trinco de segurança, porta cadeado, fácil desencaixe da dobradiça para limpeza.', 'car-0041'),
+(42, 'Produto de aço, acabamento personalizável, soleira de aço inox, puxador de alumínio, fechadura bico-de-papagaio com pino de segurança, folhas com divisão quadriculada.', 'car-0042'),
+(43, 'Produto de aço, acabamento personalizável, soleira de aço inox, puxador de alumínio, fechadura bico-de-papagaio com pino de segurança, folhas com divisão horizontal.', 'car-0043'),
+(44, 'Produto de aço, acabamento personalizável, soleira de aço inox, puxador embutido, veneziana móvel ventilada, fechadura bico-de-papagaio com pino de segurança.', 'car-0044'),
+(45, 'Produto de aço, acabamento personalizável, soleira de aço inox, fecho embutido de aço inox e puxador de alumínio, fechadura bico-de-papagaio com pino de segurança, sistema de regulagem de ventilação e iluminação.', 'car-0045'),
+(46, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vedação acústica, controle remoto, perfil com poliuretano expandido, vidro laminado, puxador de alumínio com design Italiano e travas multiponto, caixa especial de vedação no guia inferior e superior, sistema de correr elevatório, guias inferiores projetados para maior resistência e melhor vazão de água.', 'car-0046'),
+(47, 'Produto de alumínio, pintura eletrostática a pó na cor branca, vidro liso, perfis exclusivos, sistema de regulagem de ventilação e iluminação, fecho de toque único, guia cascata, palhetas Móveis.', 'car-0047'),
+(48, 'Produto de alumínio, pintura eletrostática a pó na cor branca, vidro liso, perfis exclusivos, sistema de regulagem de ventilação e iluminação, fecho de toque único, guia cascata, grade, palhetas Móveis.', 'car-0048'),
+(49, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, perfil com poliuretano expandido, fecho embutido de toque único, guia cascata.', 'car-0049'),
+(50, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, perfil com poliuretano expandido, fecho embutido de toque único, guia cascata, controle remoto.', 'car-0050'),
+(51, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, fecho embutido toque único, caixa de vedação, caixa de dreno, veneziana móvel ventilada, guia cascata, grade.', 'car-0051'),
+(52, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, fecho embutido toque único, caixa de vedação, caixa de dreno, veneziana móvel ventilada, guia cascata.', 'car-0052'),
+(53, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vedação acústica, puxador de alumínio com design Italiano e travas multiponto, caixa especial de vedação no guia inferior e superior, sistema de correr elevatório, guias inferiores projetados para maior resistência e melhor vazão de água.', 'car-0053'),
+(54, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, fecho embutido toque único, caixa de vedação, caixa de dreno, guia cascata, grade.', 'car-0054'),
+(55, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, fecho embutido toque único, caixa de vedação, caixa de dreno, guia cascata.', 'car-0055'),
+(56, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho de alumínio, vidro mini boreal, tela mosquiteira integrada.', 'car-0056'),
+(57, 'Produto de alumínio, pintura coil coating na cor branca, perfis exclusivos, amortecedor de impactos, resistente a umidade: não empena, não estufa e não desemplaca (lâmina), batente regulável, fácil de limpar, não amarela e não apodrece, versatilidade e facilidade na instalação, resistente a cupins e pragas.', 'car-0057'),
+(58, 'Produto de alumínio, pintura coil coating na cor branca, perfis exclusivos, amortecedor de impactos, resistente a umidade: não empena, não estufa e não desemplaca (lâmina), batente regulável, fácil de limpar, não amarela e não apodrece, versatilidade e facilidade na instalação, resistente a cupins e pragas, com fechadura de banheiro.', 'car-0058'),
+(59, 'Produto de alumínio, pintura coil coating na cor Madeira, perfis exclusivos, amortecedor de impactos, resistente a umidade: não empena, não estufa e não desemplaca (lâmina), batente regulável, fácil de limpar, não amarela e não apodrece, versatilidade e facilidade na instalação, resistente a cupins e pragas.', 'car-0059'),
+(60, 'Produto de alumínio, pintura coil coating na cor Madeira, perfis exclusivos, amortecedor de impactos, resistente a umidade: não empena, não estufa e não desemplaca (lâmina), batente regulável, fácil de limpar, não amarela e não apodrece, versatilidade e facilidade na instalação, resistente a cupins e pragas, com fechadura de banheiro.', 'car-0060'),
+(61, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho de alumínio, vidro mini boreal, grade.', 'car-0061'),
+(62, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho de alumínio, vidro mini boreal.', 'car-0062'),
+(63, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro laminado, vedação acústica, controle remoto, perfil com poliuretano expandido, puxador de alumínio com design Italiano e travas multiponto, caixa especial de vedação no guia inferior e superior, sistema de correr elevatório, guias inferiores projetados para maior resistência e melhor vazão de água.', 'car-0063'),
+(64, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, fechadura rolete e fechadura de segurança com a mesma chave, friso de alumínio com acabamento inox, puxador inox. ', 'car-0064'),
+(65, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, fechadura rolete e fechadura de segurança com a mesma chave, friso de alumínio com acabamento inox, vidro neutral temperado, puxador inox.', 'car-0065'),
+(66, '\"Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, friso de alumínio com acabamento inox, vidro neutral temperado, fechadura com função antipânico que permite abertura automática da porta pelo lado interno, função \"\"lock\"\" bloqueia a entrada externa mesmo com senha numérica e biometria cadastrada, conector externo para fornecimento emergencial de energia com bateria de 9v.\"', 'car-0066'),
+(67, '\"Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, friso de alumínio com acabamento inox, fechadura com função antipânico que permite abertura automática da porta pelo lado interno, função \"\"lock\"\" bloqueia a entrada externa mesmo com senha numérica e biometria cadastrada, conector externo para fornecimento emergencial de energia com bateria de 9v.\"', 'car-0067'),
+(68, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, fechadura rolete e fechadura de segurança com a mesma chave, puxador inox.', 'car-0068'),
+(69, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, fechadura rolete e fechadura de segurança com a mesma chave, friso de alumínio com acabamento inox, puxador inox. ', 'car-0069'),
+(70, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, fechadura rolete e fechadura de segurança com a mesma chave, friso de alumínio com acabamento inox, vidro neutral temperado, puxador inox.', 'car-0070'),
+(71, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, fechadura rolete e fechadura de segurança com a mesma chave, puxador inox.', 'car-0071'),
+(72, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro mini boreal, eixo da báscula de aço inox.', 'car-0072'),
+(73, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, fecho embutido, soleira com friso de aço inox, sistema de regulagem de ventilação e iluminação.', 'car-0073'),
+(74, 'Tecido de fibra de vidro envolvido em pvc, malha inteiriça com espaçamento homogêneo, escova de vedação 5x5mm, tela removível de fácil instalação.', 'car-0074'),
+(75, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real.', 'car-0075'),
+(76, 'Produto de alumínio, Pintura eletrostática a pó na cor branca.', 'car-0076'),
+(77, 'Produto de alumínio, pintura coil coating na cor branca, batente regulável de acordo com a variação da parede.', 'car-0077'),
+(78, 'Produto de alumínio, pintura coil coating na cor Madeira, batente regulável de acordo com a variação da parede.', 'car-0078'),
+(79, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, dobradiça reforçada, veneziana ventilada.', 'car-0079'),
+(80, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho embutido, perfil com poliuretano expandido, vidro liso.', 'car-0080'),
+(81, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho embutido, perfil com poliuretano expandido, vidro liso, controle remoto.', 'car-0081'),
+(82, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro mini boreal, maçaneta de alumínio, dobradiça reforçada, báscula.', 'car-0082'),
+(83, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, veneziana ventilada, maçaneta de alumínio, dobradiça reforçada.', 'car-0083'),
+(84, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, lambri horizontal, maçaneta de alumínio, dobradiça reforçada.', 'car-0084'),
+(85, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, lambri horizontal, dobradiça reforçada, fechadura rolete, puxador de aço inox 304.', 'car-0085'),
+(86, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, puxador inox, fechadura rolete.', 'car-0086'),
+(87, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, fechadura rolete, puxador inox, vidro neutral temperado.', 'car-0087'),
+(88, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, puxador inox, fechadura rolete.', 'car-0088'),
+(89, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, puxador inox, fechadura multiponto.', 'car-0089'),
+(90, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, puxador inox, vidro neutral temperado, fechadura multiponto.', 'car-0090'),
+(91, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, puxador inox, vidro neutral temperado, fechadura multiponto.', 'car-0091'),
+(92, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, puxador inox, fechadura multiponto.', 'car-0092'),
+(93, 'Produto de alumínio, pintura eletrostática a pó na cor cerejeira real, perfis exclusivos, fechadura rolete, puxador inox, vidro neutral temperado.', 'car-0093'),
+(94, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, lambri horizontal, seteira, dobradiça reforçada, fechadura rolete, puxador de aço inox 304, fechadura de segurança.', 'car-0094'),
+(95, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro temperado mini boreal, maçaneta de alumínio, lambris horizontais na base da porta, postigo.', 'car-0095'),
+(96, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, puxador embutido, divisão horizontal, 2 folhas Móveis, dupla fechadura.', 'car-0096'),
+(97, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, puxador embutido, divisão central, 2 folhas Móveis, dupla fechadura.', 'car-0097'),
+(98, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro vidro temperado inteiriço, puxador embutido, tubo reforçado, 2 folhas Móveis, dupla fechadura.', 'car-0098'),
+(99, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro vidro temperado inteiriço, puxador embutido, tubo reforçado.', 'car-0099'),
+(100, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, puxador embutido.', 'car-0100'),
+(101, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, puxador embutido, maior vão livre.', 'car-0101'),
+(102, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, puxador embutido, divisão horizontal.', 'car-0102'),
+(103, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro liso, puxador embutido, divisão horizontal, maior vão livre.', 'car-0103'),
+(104, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro  temperado inteiriço, puxador embutido, tubo reforçado.', 'car-0104'),
+(105, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, vidro  temperado inteiriço, puxador embutido, tubo reforçado, maior vão livre.', 'car-0105'),
+(106, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho embutido, 3 folhas Móveis, vidro temperado inteiriço, tubo reforçado, fechadura bico-de-papagaio com pino de segurança.', 'car-0106'),
+(107, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho embutido, vidro temperado inteiriço, tubo reforçado, fechadura bico-de-papagaio com pino de segurança.', 'car-0107'),
+(108, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho embutido, vidro liso, fechadura bico-de-papagaio com pino de segurança.', 'car-0108'),
+(109, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e robustos, fecho embutido, 3 folhas Móveis, vidro liso, fechadura bico-de-papagaio com pino de segurança.', 'car-0109'),
+(110, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, Fecho de alumínio, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata, veneziana móvel ventilada, grade.', 'car-0110'),
+(111, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, Fecho de alumínio, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata, veneziana móvel ventilada.', 'car-0111'),
+(112, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, vidro liso, guia cascata, fecho de alumínio, grade horizontal reforçada, sem parafuso aparente e sem divisão.', 'car-0112'),
+(113, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, fecho de alumínio, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata, grade.', 'car-0113'),
+(114, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, fecho de alumínio, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata.', 'car-0114'),
+(115, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, vidro liso, caixa e escova de vedação, caixa de dreno, borracha EPDM, guia cascata, fecho crescente, grade horizontal reforçada sem parafuso aparente e sem divisão.', 'car-0115'),
+(116, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, vidro liso, caixa e escova de vedação, caixa de dreno, borracha EPDM, guia cascata, fecho crescente.', 'car-0116'),
+(117, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, fecho de alumínio, vidro mini boreal.', 'car-0117'),
+(118, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, fecho de alumínio, vidro mini boreal, grade.', 'car-0118'),
+(119, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, fecho de alumínio, grade horizontal reforçada sem parafuso aparente.', 'car-0119'),
+(120, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro mini boreal.', 'car-0120'),
+(121, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, dobradiça reforçada.', 'car-0121'),
+(122, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, perfil reforçado que serve de puxador, vidro liso, divisão central, fechadura bico de papagaio.', 'car-0122'),
+(123, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, perfil reforçado que serve de puxador, vidro liso, divisão central, fechadura bico-de-papagaio.', 'car-0123'),
+(124, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, dobradiça reforçada, vidro liso, veneziana na base da porta, grade horizontal reforçada, sem parafuso aparente e sem divisão.', 'car-0124'),
+(125, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, dobradiça reforçada, vidro mini boral, veneziana na base da porta.', 'car-0125'),
+(126, 'Produto biodegradável de fácil de aplicação, com ação multitensoativa e inibidor de corrosão.', 'car-0126'),
+(127, 'Produto biodegradável de fácil de aplicação, com alto poder desincrustante. Não inflamável.', 'car-0127'),
+(128, 'Produto biodegradável de fácil de aplicação para uma limpeza instantânea. Possuiu ação antiaderente e forma película protetora.', 'car-0128'),
+(129, 'Tecido de fibra de vidro envolvido em pvc, malha inteiriça com espaçamento homogêneo, fechamento em 45 graus, escova de vedação 5x5mm, tela removível de fácil instalação.', 'car-0129'),
+(130, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos.', 'car-0130'),
+(131, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, vidro liso, caixa de dreno com escova de vedação, borracha EPDM, fecho embutido de alumínio com chave, sistema de regulagem de ventilação e iluminação, grade quadriculada.', 'car-0131'),
+(132, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, vidro liso, caixa de dreno com escova de vedação e borracha EPDM, fecho embutido de alumínio e grade quadriculada.', 'car-0132'),
+(133, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, vidro mini boreal, borracha EPDM, fecho de alumínio e grade quadriculada.', 'car-0133'),
+(134, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, puxador de aço inox, frisos de aço inox, fechadura Rolete, acompanha 3 chaves.', 'car-0134'),
+(135, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, maçaneta de alumínio.', 'car-0135'),
+(136, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, vidro mini boreal, veneziana na base da porta e báscula na parte superior, maçaneta de alumínio.', 'car-0136'),
+(137, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, vidro liso, soleira de aço inox, puxador de alumínio, fechadura bico-de-papagaio com pino de segurança.', 'car-0137'),
+(138, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, soleira de aço inox, vidro liso, caixa de dreno com escova de vedação, borracha EPDM, fecho embutido de alumínio, puxador de Alumínio na cor do produto, sistema de regulagem de ventilação e iluminação.', 'car-0138'),
+(139, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor preto, vidro liso, caixa de dreno com escova de vedação, borracha EPDM, fecho embutido de alumínio com chave, sistema de regulagem de ventilação e iluminação.', 'car-0139'),
+(140, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, 1 veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio.', 'car-0140'),
+(141, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, 1 veneziana móvel ventilada, caixa de dreno com escova de vedação e borracha EPDM, fecho de alumínio, grade quadriculada.', 'car-0141'),
+(142, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, fecho de alumínio.', 'car-0142'),
+(143, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca, vidro liso, fecho de alumínio e grade quadriculada.', 'car-0143'),
+(144, 'Produto de aço, pintura de acabamento com esmalte acrílico na cor branca,maçaneta de alumínio.', 'car-0144'),
+(145, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, fecho crescente, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata, grade horizontal.', 'car-0145'),
+(146, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, fecho de alumínio e fecho crescente, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata, veneziana móvel ventilada.', 'car-0146'),
+(147, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos, vidro liso, fecho de alumínio e fecho crescente, caixa de vedação, caixa de dreno, borracha EPDM, guia cascata, veneziana móvel ventilada, grade horizontal.', 'car-0147'),
+(148, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, dobradiça reforçada, vidro mini boreal, veneziana na base da porta, vidros na parte superior.', 'car-0148'),
+(149, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, fecho de alumínio.', 'car-0149'),
+(150, 'Produto de alumínio, pintura eletrostática a pó na cor branca, perfis exclusivos e reforçado, dobradiça reforçada, vidro mini boreal, veneziana na base da porta, básculas na parte superior.', 'car-0150');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `environment_images`
 --
 
@@ -8348,25 +8542,23 @@ INSERT INTO `linhas` (`id`, `codigo_linha`, `nome_linha`, `conceito`) VALUES
 
 CREATE TABLE `materiais` (
   `id` int(11) NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `imagem` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nome_material` varchar(50) DEFAULT NULL,
+  `codigo_material` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `materiais`
 --
 
-INSERT INTO `materiais` (`id`, `nome`, `slug`, `imagem`) VALUES
-(1, 'Concretos', 'concreto', 'concreto.jpg'),
-(2, 'Madeira', 'madeira', 'madeira.jpeg'),
-(3, 'Mármore', 'marmore', 'marmore.jpg'),
-(4, 'Pedra', 'pedra', 'pedra.jpg'),
-(5, 'Quartzites', 'quartzites', 'quartzite.jpg'),
-(6, 'Terrazzo', 'terrazzo', 'terrazo.jpg'),
-(7, 'Sintéticos', 'sintetico', 'sintetico.jpg'),
-(8, 'Metálico', 'metal', 'metalico.png'),
-(9, 'Argila', 'argila', 'argila.jpg');
+INSERT INTO `materiais` (`id`, `nome_material`, `codigo_material`) VALUES
+(1, 'Aço', 'mat-0001'),
+(2, 'Alumínio', 'mat-0002'),
+(3, 'Produto Químico', 'mat-0003'),
+(4, 'Aço Inox', 'mat-0004'),
+(5, 'Zamac', 'mat-0005'),
+(6, 'Nylon e Alumínio', 'mat-0006'),
+(7, 'Nylon', 'mat-0007'),
+(8, 'Não se aplica', 'nsa-0001');
 
 -- --------------------------------------------------------
 
@@ -8378,7 +8570,7 @@ CREATE TABLE `modelos` (
   `id` int(11) NOT NULL,
   `nome_modelo` varchar(150) NOT NULL,
   `codigo_modelo` varchar(50) NOT NULL,
-  `descricao_modelo` varchar(100) DEFAULT NULL,
+  `descricao_modelo` text DEFAULT NULL,
   `codigo_diferencial` varchar(50) NOT NULL,
   `codigo_categoria` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -8388,40 +8580,40 @@ CREATE TABLE `modelos` (
 --
 
 INSERT INTO `modelos` (`id`, `nome_modelo`, `codigo_modelo`, `descricao_modelo`, `codigo_diferencial`, `codigo_categoria`) VALUES
-(1, 'Janela Veneziana Multiflex', 'mod-0001', '', '', 'cat-0001'),
-(2, 'Janela Veneziana', 'mod-0002', '', '', 'cat-0001'),
-(3, 'Janela de Correr', 'mod-0003', '', '', 'cat-0001'),
-(4, 'Portinhola', 'mod-0004', '', '', 'cat-0002'),
-(5, 'Porta de Abrir', 'mod-0005', '', '', 'cat-0002'),
-(6, 'Janela Maxim-ar', 'mod-0006', '', '', 'cat-0001'),
-(7, 'Porta de Correr', 'mod-0007', '', '', 'cat-0002'),
-(8, 'Porta Balcão', 'mod-0008', '', '', 'cat-0002'),
-(9, 'Porta Balcão Multiflex', 'mod-0009', '', '', 'cat-0002'),
-(10, 'Tela Mosquiteira Folha Multiflex', 'mod-0010', '', '', 'cat-0003'),
-(11, 'Junção', 'mod-0011', '', '', 'cat-0004'),
-(12, 'Janela Basculante', 'mod-0012', '', '', 'cat-0001'),
-(13, 'Janela Integrada', 'mod-0013', '', '', 'cat-0001'),
-(14, 'Porta Integrada', 'mod-0014', '', '', 'cat-0002'),
-(15, 'Porta Pivotante', 'mod-0015', '', '', 'cat-0002'),
-(16, 'Tela Mosquiteira de Correr', 'mod-0016', '', '', 'cat-0003'),
-(17, 'Guarnição Porta Pivotante', 'mod-0017', '', '', 'cat-0005'),
-(18, 'Guarnição Janela Maxim-ar e Basculante', 'mod-0018', '', '', 'cat-0005'),
-(19, 'Guarnição Porta Integrada Sound Block', 'mod-0019', '', '', 'cat-0005'),
-(20, 'Guarnição Janela Veneziana e de Correr', 'mod-0020', '', '', 'cat-0005'),
-(21, 'Guarnição Janela Integrada', 'mod-0021', '', '', 'cat-0005'),
-(22, 'Guarnição Porta Balcão e Porta de Abrir com Lambri e Seteira', 'mod-0022', '', '', 'cat-0005'),
-(23, 'Guarnição Porta de Abrir', 'mod-0023', '', '', 'cat-0005'),
-(24, 'Guarnição Porta Balcão e Porta de Correr', 'mod-0024', '', '', 'cat-0005'),
-(25, 'Guarnição Porta Integrada', 'mod-0025', '', '', 'cat-0005'),
-(26, 'Guarnição Porta de Correr Sound Block', 'mod-0026', '', '', 'cat-0005'),
-(27, 'Guarnição Janela de Correr Sound Block', 'mod-0027', '', '', 'cat-0005'),
-(28, 'Guarnição Porta Social Pivotante', 'mod-0028', '', '', 'cat-0005'),
-(29, 'Guarnição Janela Integrada Sound Block', 'mod-0029', '', '', 'cat-0005'),
-(30, 'Guarnição Porta Interna', 'mod-0030', '', '', 'cat-0005'),
-(31, 'Limpa Esquadria', 'mod-0031', '', '', 'cat-0006'),
-(32, 'Limpa Grill', 'mod-0032', '', '', 'cat-0006'),
-(33, 'Limpa Vidros', 'mod-0033', '', '', 'cat-0006'),
-(34, 'Tela Mosquiteira Inteiriça', 'mod-0034', '', '', 'cat-0003');
+(1, 'Janela Veneziana Multiflex', 'mod-0001', 'Com sistema de regulagem através das palhetas Móveis, as Janelas Venezianas Multiflex possibilitam maior controle de privacidade, entrada de luz e ventilação ao ambiente.', '', 'cat-0001'),
+(2, 'Janela Veneziana', 'mod-0002', 'Com Folhas Móveis ventiladas, as Janelas Venezianas garantem a privacidade do ambiente sem perder o arejamento. Para impedir a entrada de ar basta fechar as Folhas de vidro.', '', 'cat-0001'),
+(3, 'Janela de Correr', 'mod-0003', 'Com visual clean, as Janelas de Correr são excelentes para ambientes que exijam luz natural.', '', 'cat-0001'),
+(4, 'Portinhola', 'mod-0004', 'As Portinholas são ótimas opções de fechamento para compartimentos pequenos e isolados.', '', 'cat-0002'),
+(5, 'Porta de Abrir', 'mod-0005', 'Com versatilidade e design diferenciado, as Portas de Abrir se adequam a qualquer projeto arquitetônico', '', 'cat-0002'),
+(6, 'Janela Maxim-ar', 'mod-0006', 'As Janelas Maxim-ar permitem excelente luminosidade e ventilação ao ambiente. As opções com alturas maiores proporcionam ainda mais iluminação natural ao ambiente.', '', 'cat-0001'),
+(7, 'Porta de Correr', 'mod-0007', 'As Portas de Correr proporcionam iluminação natural ao ambiente com aproveitamento de espaço interno.', '', 'cat-0002'),
+(8, 'Porta Balcão', 'mod-0008', 'Com Folhas Móveis ventiladas, as Portas Balcão garantem a privacidade do ambiente sem perder o arejamento. Para impedir a entrada de ar basta fechar as Folhas de vidro.', '', 'cat-0002'),
+(9, 'Porta Balcão Multiflex', 'mod-0009', 'Com sistema de regulagem através das palhetas Móveis, as Portas Balcão Multiflex possibilitam maior controle de privacidade, entrada de luz e ventilação ao ambiente.', '', 'cat-0002'),
+(10, 'Tela Mosquiteira Folha Multiflex', 'mod-0010', 'Exclusividade Sasazaki. As Telas Mosquiteiras aplicadas na folha da Porta Multiflex garantem a eficiência na vedação e impedem a passagem de insetos pelas laterais do produto.', '', 'cat-0003'),
+(11, 'Junção', 'mod-0011', 'As Junções servem para unir duas ou mais janelas permitindo composições horizontais.', '', 'cat-0004'),
+(12, 'Janela Basculante', 'mod-0012', 'As janelas basculantes permite excelente luminosidade e ventilação ao ambiente. Quando abertas, as básculas paralelas favorecem a movimentação do ar.', '', 'cat-0001'),
+(13, 'Janela Integrada', 'mod-0013', 'As Janelas Integradas Veneziana são versáteis, este modelo apresenta as vantagens das janelas de correr e janelas venezianas unidas. Controle de iluminação, ventilação e arejamento com design único.', '', 'cat-0001'),
+(14, 'Porta Integrada', 'mod-0014', 'As Portas Integradas são versáteis, este modelo apresenta as vantagens das portas de correr e portas balcão unidas. Controle de iluminação, ventilação e arejamento com design único.', '', 'cat-0002'),
+(15, 'Porta Pivotante', 'mod-0015', 'Com perfis exclusivos as portas Pivotantes são conhecidas por sua elegância e estilo, foram projetadas para ambientes diferenciados e sofisticados.', '', 'cat-0002'),
+(16, 'Tela Mosquiteira de Correr', 'mod-0016', 'As Telas Mosquiteira de Correr possuem perfis com design clean trazem beleza à fachada da sua casa. Garantem a eficiência na vedação e impedem a passagem de insetos pelas laterais do produto.', '', 'cat-0003'),
+(17, 'Guarnição Porta Pivotante', 'mod-0017', 'As Guarnições servem para dar acabamento entre o batente e alvenaria da parede.', '', 'cat-0005'),
+(18, 'Guarnição Janela Maxim-ar e Basculante', 'mod-0018', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(19, 'Guarnição Porta Integrada Sound Block', 'mod-0019', 'As Guarnições servem para dar acabamento entre o batente e alvenaria da parede.', '', 'cat-0005'),
+(20, 'Guarnição Janela Veneziana e de Correr', 'mod-0020', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(21, 'Guarnição Janela Integrada', 'mod-0021', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(22, 'Guarnição Porta Balcão e Porta de Abrir com Lambri', 'mod-0022', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(23, 'Guarnição Porta de Abrir', 'mod-0023', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(24, 'Guarnição Porta Balcão e Porta de Correr', 'mod-0024', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(25, 'Guarnição Porta Integrada', 'mod-0025', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(26, 'Guarnição Porta de Correr Sound Block', 'mod-0026', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(27, 'Guarnição Janela de Correr Sound Block', 'mod-0027', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(28, 'Guarnição Porta Social Pivotante', 'mod-0028', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(29, 'Guarnição Janela Integrada Sound Block', 'mod-0029', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(30, 'Guarnição Porta Interna', 'mod-0030', 'As Guarnições servem para dar acabamento entre o batente da esquadria e alvenaria da parede.', '', 'cat-0005'),
+(31, 'Limpa Esquadria', 'mod-0031', 'Só quem é especialista em portas e janelas sabe a melhor maneira de limpá-las. Saz Clean é a solução ideal para limpeza de esquadrias. É fácil de aplicar, tem ação multitensoativa.', '', 'cat-0006'),
+(32, 'Limpa Grill', 'mod-0032', 'Saz Clean Limpa Grill é um produto inédito com excelente ação desincrustante para limpeza de grelhas e grills em geral. Super concentrado, proporciona maior rendimento nas aplicações.', '', 'cat-0006'),
+(33, 'Limpa Vidros', 'mod-0033', 'Saz Clean Limpa Vidros tem ação multitensoativa que permite a limpeza e secagem instantânea, além de formar uma película antiaderente e manter uma fragrância suave por muito mais tempo.', '', 'cat-0006'),
+(34, 'Tela Mosquiteira Inteiriça', 'mod-0034', 'As Telas Mosquiteira Inteiriças são ótimas para visibilidade e circulação de ar no ambiente, cobrem as imperfeições da parede, garantem a eficiência na vedação e impedem a passagem de insetos.', '', 'cat-0003');
 
 -- --------------------------------------------------------
 
@@ -14019,6 +14211,33 @@ INSERT INTO `municipio` (`id`, `codigo`, `nome`, `uf`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `opcionais`
+--
+
+CREATE TABLE `opcionais` (
+  `id` int(11) NOT NULL,
+  `nome_opcional` varchar(100) DEFAULT NULL,
+  `codigo_opcional` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `opcionais`
+--
+
+INSERT INTO `opcionais` (`id`, `nome_opcional`, `codigo_opcional`) VALUES
+(1, 'Não', 'nao-0001'),
+(2, 'Não se aplica', 'nsa-0001'),
+(3, 'Guarnição', 'opc-0001'),
+(4, 'Tela Mosquiteira Inteiriça', 'opc-0003'),
+(5, 'Junção vertical', 'opc-0004'),
+(6, 'Tela Mosquiteira (Folha Multiflex)', 'opc-0006'),
+(7, 'Tela Mosquiteira Inteiriça', 'opc-0007'),
+(8, 'Tela Mosquiteira de Correr', 'opc-0008'),
+(9, 'Junção vertical', 'opc-0009');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `permissao_funcao`
 --
 
@@ -17583,6 +17802,27 @@ CREATE TABLE `totens` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tratamentos`
+--
+
+CREATE TABLE `tratamentos` (
+  `id` int(11) NOT NULL,
+  `codigo_tratamento` varchar(50) NOT NULL,
+  `descricao_tratamento` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tratamentos`
+--
+
+INSERT INTO `tratamentos` (`id`, `codigo_tratamento`, `descricao_tratamento`) VALUES
+(1, 'nsa-0001', 'Não se aplica'),
+(2, 'tra-0001', 'Pré-Tratamento Nanocerâmico e Proteção Cataforese'),
+(3, 'tra-0002', 'Pré-Tratamento com desengraxe e conversor de camada');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuarios`
 --
 
@@ -17603,7 +17843,37 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `login`, `senha`, `email`, `role`, `idpermissao`, `status`) VALUES
 (2, 'gerente', '$2y$10$XNeLXcuOXYTqyQca51rxkOvBipCOotDcyOPHzXVSdxBgQI7nF7/HO', 'gerente@sasazaki.com.br', 'gerente', 2, 'd'),
 (3, 'beeid', '$2y$10$lKC7yWtGVeHvCytzfH.uheaEWVc77/v/YMD5iNSzRQpnUqFU./b12', 'beeid@beeid.com.br', 'admin', 4, 'a'),
-(4, 'alan', '$2y$10$veYQwY6gYplhXuL.oS0/SuwO2GSzD8ptlU1RrdAssXuHsc.kTa0CK', 'teste@teste.com.br', 'admin', 2, 'a');
+(4, 'alan', '$2y$10$veYQwY6gYplhXuL.oS0/SuwO2GSzD8ptlU1RrdAssXuHsc.kTa0CK', 'teste@teste.com.br', 'admin', 2, 'a'),
+(0, 'Alan.Lamin', '$2y$10$1EcVYgsZVftLtkhOG0uosefITHuHuh0807SMuPcl4LiyeuoQ4edqe', 'alan.lamin@ciahering.com.br', 'admin', 4, 'a');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `vidros`
+--
+
+CREATE TABLE `vidros` (
+  `id` int(11) NOT NULL,
+  `codigo_cor` varchar(50) DEFAULT NULL,
+  `codigo_vidro` varchar(50) NOT NULL,
+  `tipo_vidro` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `vidros`
+--
+
+INSERT INTO `vidros` (`id`, `codigo_cor`, `codigo_vidro`, `tipo_vidro`) VALUES
+(1, 'nsa-0001', 'nsa-0001', 'Não se aplica'),
+(2, 'cvi-0001', 'tvi-0001', 'Liso'),
+(3, 'cvi-0001', 'tvi-0003', 'Mini Boreal'),
+(4, 'cvi-0003', 'tvi-0004', 'Não acompanha vidro'),
+(5, 'cvi-0001', 'tvi-0005', 'Mini Boreal Temperado abaixo de 1,10m'),
+(6, 'cvi-0001', 'tvi-0006', 'Liso Temperado abaixo de 1,10m'),
+(7, 'cvi-0001', 'tvi-0007', 'Laminado'),
+(8, 'cvi-0004', 'tvi-0008', 'Neutral Temperado'),
+(9, 'cvi-0001', 'tvi-0009', 'Temperado Inteiriço'),
+(10, 'cvi-0001', 'tvi-0010', 'Mini Boreal Temperado');
 
 -- --------------------------------------------------------
 
@@ -20059,6 +20329,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Índices para tabela `acabamentos`
+--
+ALTER TABLE `acabamentos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo_acabamento` (`codigo_acabamento`);
+
+--
 -- Índices para tabela `ambientes`
 --
 ALTER TABLE `ambientes`
@@ -20084,6 +20361,12 @@ ALTER TABLE `categorias`
   ADD UNIQUE KEY `codigo_categoria` (`codigo_categoria`);
 
 --
+-- Índices para tabela `diferenciais`
+--
+ALTER TABLE `diferenciais`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `fotos`
 --
 ALTER TABLE `fotos`
@@ -20097,11 +20380,23 @@ ALTER TABLE `linhas`
   ADD UNIQUE KEY `codigo_linha` (`codigo_linha`);
 
 --
+-- Índices para tabela `materiais`
+--
+ALTER TABLE `materiais`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `modelos`
 --
 ALTER TABLE `modelos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `codigo_modelo` (`codigo_modelo`);
+
+--
+-- Índices para tabela `opcionais`
+--
+ALTER TABLE `opcionais`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `produtos`
@@ -20111,8 +20406,27 @@ ALTER TABLE `produtos`
   ADD UNIQUE KEY `codigo_produto` (`codigo_produto`);
 
 --
+-- Índices para tabela `tratamentos`
+--
+ALTER TABLE `tratamentos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo_tratamento` (`codigo_tratamento`);
+
+--
+-- Índices para tabela `vidros`
+--
+ALTER TABLE `vidros`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `acabamentos`
+--
+ALTER TABLE `acabamentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `ambientes`
@@ -20127,6 +20441,12 @@ ALTER TABLE `categorias`
   MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de tabela `diferenciais`
+--
+ALTER TABLE `diferenciais`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+
+--
 -- AUTO_INCREMENT de tabela `fotos`
 --
 ALTER TABLE `fotos`
@@ -20139,16 +20459,40 @@ ALTER TABLE `linhas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de tabela `materiais`
+--
+ALTER TABLE `materiais`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de tabela `modelos`
 --
 ALTER TABLE `modelos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT de tabela `opcionais`
+--
+ALTER TABLE `opcionais`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=629;
+
+--
+-- AUTO_INCREMENT de tabela `tratamentos`
+--
+ALTER TABLE `tratamentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `vidros`
+--
+ALTER TABLE `vidros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
