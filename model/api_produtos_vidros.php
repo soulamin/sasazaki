@@ -3,7 +3,7 @@ require '../fontes/conexao.php';
 $username = "sistemas";
 $password = "sasazaki";
 
-$urlaut = "http://187.92.100.10:8180/api/esp/v1/sszk-prod-cor.r";
+$urlaut = "http://187.92.100.10:8180/api/esp/v1/sszk-prod-vidro.r";
 $dados = array();
 $json = json_encode($dados);
 $ch = curl_init($urlaut);
@@ -23,18 +23,22 @@ curl_setopt(
 );
 $Resultado  = curl_exec($ch);
 $j          = json_decode($Resultado, false);
-$dd = $j->items[0]->{'v-ds-tabelas'}->{'tt-sk-prod-cor'};
+$dd = $j->items[0]->{'v-ds-tabelas'}->{'tt-sk-prod-vidro'};
 
 foreach ($dd as $dados) {
     $inf = $dados;
     json_encode($inf);
 
-     $codcor = $inf->{'cod-cor'};
+     $codvidro = $inf->{'cod-vidro'};
      $codproduto = $inf->{'cod-produto'};
+     $largura = $inf->{'largura'};
+     $quantidade = $inf->{'qtde'};
+     $altura = $inf->{'altura'};
+     $espessura = $inf->{'espessura'};
 
 
     /* Verifica se ja existe codigo cadastrado */
-    $sql_select = "SELECT COUNT(codigo_produto) AS qtd FROM produtos_cores WHERE codigo_produto = :codigo_produto ";
+    $sql_select = "SELECT COUNT(codigo_produto) AS qtd FROM produtos_vidros WHERE codigo_produto = :codigo_produto ";
     $stverifica = $pdo->prepare($sql_select);
     $stverifica->bindParam(':codigo_produto', $codproduto);
     $stverifica->execute();
@@ -42,13 +46,17 @@ foreach ($dd as $dados) {
 
     if ($linha['qtd'] == 0) {
       
-        $sql_insert = "INSERT INTO produtos_cores (codigo_produto,codigo_cor)
-                                          VALUES (:codigo_produto,:codigo_cor) ";
+        $sql_insert = "INSERT INTO produtos_vidros (codigo_produto,codigo_vidro,altura,largura,quantidade,espessura)
+                                          VALUES (:codigo_produto,:codigo_vidro,:altura,:largura,:quantidade,:espessura) ";
 
         // Prepara uma senten�a para ser executada                                               
         $statement = $pdo->prepare($sql_insert);
         $statement->bindParam(':codigo_produto', $codproduto);
-        $statement->bindParam(':codigo_cor', $codcor);
+        $statement->bindParam(':codigo_vidro', $codvidro);
+        $statement->bindParam(':altura', $altura);
+        $statement->bindParam(':quantidade', $quantidade);
+        $statement->bindParam(':espessura', $espessura);
+        $statement->bindParam(':largura', $largura);
 
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
@@ -63,13 +71,18 @@ foreach ($dd as $dados) {
     } else {
 
 
-        $sql_update = "UPDATE produtos_cores SET codigo_cor = :codigo_cor
+        $sql_update = "UPDATE produtos_vidros SET codigo_vidro = :codigo_vidro ,altura=:altura,
+                                                    largura=:largura,quantidade=:quantidade,espessura=:espessura
                                                 WHERE codigo_produto=:codigo_produto";
 
         // Prepara uma senten�a para ser executada                                               
         $statement = $pdo->prepare($sql_update);
         $statement->bindParam(':codigo_produto', $codproduto);
-        $statement->bindParam(':codigo_cor', $codcor);
+        $statement->bindParam(':codigo_vidro', $codvidro);
+        $statement->bindParam(':altura', $altura);
+        $statement->bindParam(':quantidade', $quantidade);
+        $statement->bindParam(':espessura', $espessura);
+        $statement->bindParam(':largura', $largura);
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
             // Definimos a mensagem de sucesso
