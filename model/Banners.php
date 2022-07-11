@@ -15,38 +15,66 @@ switch ($acao) {
     case 'Salva_Banner':
 
         // Filtra os dados e armazena em vari�veis (o filtro padr�o � FILTER_SANITIZE_STRING que remove tags HTML)
-        $email = $_POST['txt_email'];
-        $login = $_POST['txt_login'];
-        $senha = password_hash($_POST['txt_senha'], PASSWORD_DEFAULT);
-        $tipo = $_POST['txt_tipo'];
-        $status = "a"; //ativo
-        $role = "admin";
+        $titulo = $_POST['txt_titulo'];
+        $texto = $_POST['txt_texto'];
+        $posicao = $_POST['txt_posicao'];
+        $ordem = $_POST['txt_ordem'];
+        $foto = $_FILES['txt_foto'];
+        $dataexp = $_POST['txt_dataexpiracao'];
+        $totens = $_POST['txt_totem'];
+        $status = "a";
+        $ext= explode("/",$foto['type']);
+         $extensao = $ext[1];
+      
+        if ((!empty($titulo)) && (!empty($totens)) && (!empty($texto))) {
 
 
-        if ((!empty($email)) && (!empty($login)) && (!empty($senha))) {
+            $imagem = "public/banners/" . $titulo . "." . $extensao;
 
-            $sql_insert = "INSERT INTO  Banners (login,senha,email,role,idpermissao,status)
-                                                                                VALUES
-                                                                                (:login ,:senha,:email,:role,:tipo,:status)";
+
+            if (!@copy($foto['tmp_name'],  '../'.$imagem)) {
+                $errors = error_get_last();
+                "COPY ERROR: " . $errors['type'];
+                "<br />\n" . $errors['message'];
+            } else {
+            
+
+
+            $sql_insert = "INSERT INTO banners(titulo, texto, posicao, imagem, ordem, data_expiracao, status)
+                                       VALUES (:titulo, :texto, :posicao, :imagem, :ordem, :data_expiracao, :status)";
             // Prepara uma senten�a para ser executada                                               
             $statement = $pdo->prepare($sql_insert);
 
-            $statement->bindParam(':senha', $senha);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':tipo', $tipo);
-            $statement->bindParam(':role', $role);
-            $statement->bindParam(':login', $login);
+            $statement->bindParam(':titulo', $titulo);
+            $statement->bindParam(':texto', $texto);
+            $statement->bindParam(':posicao', $posicao);
+            $statement->bindParam(':imagem', $imagem);
+            $statement->bindParam(':ordem', $ordem);
+            $statement->bindParam(':data_expiracao', $dataexp);
             $statement->bindParam(':status', $status);
-
             // Executa a senten�a j� com os valores
             if ($statement->execute()) {
-                // Definimos a mensagem de sucesso
+
+               $idbanner = $pdo->lastInsertId();
+
+                foreach ($totens as $idtotem) {
+                    
+                    $sql_ins= "INSERT INTO banner_grupototens (id_banner, id_grupototens)
+                                                      VALUES  (:id_banner, :id_grupototens)";
+                    // Prepara uma senten�a para ser executada                                               
+                    $st = $pdo->prepare($sql_ins);
+
+                    $st->bindParam(':id_grupototens', $idtotem);
+                    $st->bindParam(':id_banner', $idbanner);
+                    $st->execute();
+                }
                 $cod_error = 0;
                 $msg = "Cadastro Realizado com Sucesso!";
             } else {
                 $cod_error = 1;
                 $msg = " Usuário já Cadastro!";
             }
+        }
         } else {
 
             $cod_error = 1;
@@ -113,27 +141,25 @@ switch ($acao) {
 
         while ($linha = $stmt->fetch()) {
 
-                //verifica status
-                if ($linha['status'] == 'a') {
+            //verifica status
+            if ($linha['status'] == 'a') {
 
-                    $status = '<span class="badge badge-success">Ativo</span>';
-                    //botao Desativar
-                  
+                $status = '<span class="badge badge-success">Ativo</span>';
+                //botao Desativar
 
-                    //botao editar
-                    $botaodesativar = '<a class="dropdown-item" id="btnDesativar"  codigo ="' . $linha['id'] . '"  href="#">
+
+                //botao editar
+                $botaodesativar = '<a class="dropdown-item" id="btnDesativar"  codigo ="' . $linha['id'] . '"  href="#">
                     <i class="fa fa-trash"> Desativar </i> 
                     </a>';
+            } else {
 
-                } else {
-
-                    $status = '<span class="badge badge-danger">Desativado</span>';
-                    //botao Desativar
-                    $botaodesativar = '';
-
-                }
-                //botao editar
-                $botaoeditar = '<a class="dropdown-item" id="btnEditar"  codigo ="' . $linha['id'] . '"  href="#">
+                $status = '<span class="badge badge-danger">Desativado</span>';
+                //botao Desativar
+                $botaodesativar = '';
+            }
+            //botao editar
+            $botaoeditar = '<a class="dropdown-item" id="btnEditar"  codigo ="' . $linha['id'] . '"  href="#">
                 <i class="fa fa-pencil"> Editar </i> 
                 </a>';
 
@@ -151,8 +177,10 @@ switch ($acao) {
                         </div>';
 
 
-            $U = array('Titulo' => $linha['titulo'], 'Texto' => $linha['texto'], 'Posicao' => $linha['posicao'],
-                     'Imagem' => $linha['imagem'] ,'Status' => $status, 'Html_Acao' => $botao);
+            $U = array(
+                'Titulo' => $linha['titulo'], 'Texto' => $linha['texto'], 'Posicao' => $linha['posicao'],
+                'Imagem' => $linha['imagem'], 'Status' => $status, 'Html_Acao' => $botao
+            );
             array_push($Banners, $U);
         }
 

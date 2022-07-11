@@ -21,7 +21,6 @@
                                 <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaBanners">
                                     <thead class="bg-primary-gradient text-sm">
 
-                                       
                                         <th>Título</th>
                                         <th>Texto</th>
                                         <th>Posição</th>
@@ -67,19 +66,19 @@
                                         <div class="col-md-4">
                                             <label>Posição</label>
                                             <select class="form-control" name="txt_posicao">
-                                                <option value="cabeçalho">Cabeçalho</option>
-                                                <option value="rodapé">Rodapé</option>
+                                                <option value="c">Cabeçalho</option>
+                                                <option value="r">Rodapé</option>
                                             </select>
                                         </div>
 
                                         <div class="col-md-4">
                                             <label>Ordem </label>
-                                            <input class="form-control" type="number" min="1" name='text_ordem' required>
+                                            <input class="form-control" type="number" min="1" value="1" name='txt_ordem' required>
                                         </div>
 
                                         <div class="col-md-4">
                                             <label>Data Expiração </label>
-                                            <input class="form-control" type="date" name='text_dataexpiracao' required>
+                                            <input class="form-control" type="date" name='txt_dataexpiracao' required>
                                         </div>
 
                                         <div class="col-md-12">
@@ -87,14 +86,14 @@
                                                 <label>Imagem</label>
 
                                                 <div class="custom-file">
-                                                    <input type="file" class="form-control" id="exampleInputFile" accept=".jpeg ,.jpg,.png">
+                                                    <input type="file" class="form-control"  name ="txt_foto"  accept=".jpeg ,.jpg,.png">
                                                 </div>
 
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <label>Totem</label>
-                                            <select class="selectmultiplo grupototens" name="txt_Totem" multiple style="width:100%">
+                                            <select class="selectmultiplo grupototens" name="txt_totem[]" style="width:100%"  multiple="multiple">
                                             </select>
                                         </div>
                                     </div>
