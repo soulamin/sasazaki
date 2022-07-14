@@ -74,55 +74,6 @@
                                             <select class="form-control municipio" name="txt_municipio" style="width:100%"> </select>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <label>Consultor </label>
-                                            <select class="form-control consultor" name="txt_consultor">
-                                                <option value="1" selected>Beeid</option>       
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label>Segundos Away </label>
-                                            <input class="form-control" type="number" min="1"  max="240" name='txt_segundos' >
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label>Tipo</label>
-                                            <select class="form-control" name="txt_tipo">
-                                                <option value="totem" selected>Totem</option>       
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label>CV Revenda </label>
-                                            <select class="form-control" name="txt_revenda">
-                                                <option value="Y" >SIM</option>   
-                                                <option value="N" selected>NÃO</option>        
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>CV Pbshop </label>
-                                            <select class="form-control" name="txt_pbshop">
-                                                <option value="Y" >SIM</option>   
-                                                <option value="N" selected>NÃO</option>        
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>CV Engenharia </label>
-                                            <select class="form-control" name="txt_engenharia">
-                                                <option value="Y" >SIM</option>   
-                                                <option value="N" selected>NÃO</option>        
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>CV Exportação </label>
-                                            <select class="form-control" name="txt_exportacao">
-                                                <option value="Y" >SIM</option>   
-                                                <option value="N" selected>NÃO</option>        
-                                            </select>
-                                        </div>
-
-
                                     </div>
                             </div>
                             <div class="modal-footer">

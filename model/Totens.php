@@ -32,11 +32,9 @@ switch ($acao) {
 
         if ((!empty($Responsavel)) && (!empty($Endereco)) && (!empty($Loja))) {
 
-            $sql_insert = "INSERT INTO  totens (nome_da_loja,nome_responsavel,endereco,fk_municipio_id,fk_consultor_id,segundos_away,
-                                               cv_revenda,cv_pbshop,cv_engenharia,cv_exportacao,tipo,status)
+            $sql_insert = "INSERT INTO  totens (nome_da_loja,nome_responsavel,endereco,fk_municipio_id,status)
                                                                                 VALUES
-                                               (:nome_da_loja,:nome_responsavel,:endereco,:fk_municipio_id,:fk_consultor_id,:segundos_away,
-                                                :cv_revenda,:cv_pbshop,:cv_engenharia,:cv_exportacao,:tipo,:status)";
+                                               (:nome_da_loja,:nome_responsavel,:endereco,:fk_municipio_id,:status)";
             // Prepara uma senten�a para ser executada                                               
             $statement = $pdo->prepare($sql_insert);
 
@@ -45,12 +43,6 @@ switch ($acao) {
             $statement->bindParam(':endereco', $Endereco);
             $statement->bindParam(':fk_municipio_id', $Municipio);
             $statement->bindParam(':fk_consultor_id', $Consultor);
-            $statement->bindParam(':segundos_away', $Segundo);
-            $statement->bindParam(':cv_revenda', $Revenda);
-            $statement->bindParam(':cv_pbshop', $Pbshop);
-            $statement->bindParam(':cv_engenharia', $Engenharia);
-            $statement->bindParam(':cv_exportacao', $Exportacao);
-            $statement->bindParam(':tipo', $Tipo);
             $statement->bindParam(':status', $Status);
            
 

@@ -34,8 +34,8 @@ foreach ($dd as $dados) {
       $descmodelo = $inf->{'desc-modelo'};
       $coddiferencial = $inf->{'cod-diferencial'};
       $codcategoria = $inf->{'cod-categoria'};
-    
-
+      $caminho = $inf->{'caminho'};
+      $extensao = substr($caminho, -3);
     /* Verifica se ja existe codigo cadastrado */
     $sql_select = "SELECT COUNT(descricao_modelo) AS qtd FROM modelos WHERE codigo_modelo = :codigo_modelo";
     $stverifica = $pdo->prepare($sql_select);
@@ -45,8 +45,8 @@ foreach ($dd as $dados) {
 
     if ($linha['qtd'] == 0) {
 
-        $sql_insert = "INSERT INTO modelos(codigo_modelo,nome_modelo, descricao_modelo, codigo_diferencial, codigo_categoria) 
-                         VALUES (:codigo_modelo,:nome_modelo, :descricao_modelo, :codigo_diferencial, :codigo_categoria) ";
+        $sql_insert = "INSERT INTO modelos(codigo_modelo,nome_modelo, descricao_modelo, codigo_diferencial, codigo_categoria,caminho) 
+                         VALUES (:codigo_modelo,:nome_modelo, :descricao_modelo, :codigo_diferencial, :codigo_categoria,:caminho) ";
 
         // Prepara uma senten�a para ser executada                                               
         $statement = $pdo->prepare($sql_insert);
@@ -56,12 +56,20 @@ foreach ($dd as $dados) {
         $statement->bindParam(':descricao_modelo', $descmodelo);
         $statement->bindParam(':codigo_diferencial', $coddiferencial);
         $statement->bindParam(':codigo_categoria', $codcategoria);
-
+        $statement->bindParam(':caminho', $caminho);
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
             // Definimos a mensagem de sucesso
             $cod_error = 0;
             $msg = "Cadastro Realizado com Sucesso!";
+            if(!@copy($caminho,'../public/imagens/modelos'.$codmodelo.".".$extensao))
+            {
+                   $errors= error_get_last();
+                    "COPY ERROR: ".$errors['type'];
+                    "<br />\n".$errors['message'];
+               } else {
+                    "File copied from remote!";
+               }
         } else {
             $cod_error = 1;
             $msg = " Usuário já Cadastro!";
@@ -71,7 +79,8 @@ foreach ($dd as $dados) {
     
 
     $sql_update = "UPDATE modelos SET nome_modelo=:nome_modelo, descricao_modelo=:descricao_modelo,
-                        codigo_diferencial= :codigo_diferencial, codigo_categoria=:codigo_categoria WHERE codigo_modelo=:codigo_modelo";
+                        codigo_diferencial= :codigo_diferencial, codigo_categoria=:codigo_categoria ,
+                        caminho=:caminho      WHERE codigo_modelo=:codigo_modelo";
 
     // Prepara uma senten�a para ser executada                                               
     $statement = $pdo->prepare($sql_update);
@@ -81,12 +90,20 @@ foreach ($dd as $dados) {
     $statement->bindParam(':descricao_modelo', $descmodelo);
     $statement->bindParam(':codigo_diferencial', $coddiferencial);
     $statement->bindParam(':codigo_categoria', $codcategoria);
-
+    $statement->bindParam(':caminho', $caminho);
     // Executa a senten�a j� com os valores
     if ($statement->execute()) {
         // Definimos a mensagem de sucesso
         $cod_error = 0;
         $msg = "Atualização Realizado com Sucesso!";
+        if(!@copy($caminho,'../public/imagens/modelos'.$codmodelo.".".$extensao))
+        {
+            $errors= error_get_last();
+             "COPY ERROR: ".$errors['type'];
+             "<br />\n".$errors['message'];
+        } else {
+             "File copied from remote!";
+        }
     } else {
         $cod_error = 1;
         $msg = " Usuário já Cadastro!";
