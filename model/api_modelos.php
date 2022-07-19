@@ -35,8 +35,11 @@ foreach ($dd as $dados) {
       $coddiferencial = $inf->{'cod-diferencial'};
       $codcategoria = $inf->{'cod-categoria'};
       $caminho = $inf->{'caminho'};
-      $extensao = substr($caminho, -3);
-    /* Verifica se ja existe codigo cadastrado */
+      $extensao = substr($caminho, -3)=='peg'?'jpeg':substr($caminho, -3);
+
+
+      
+      /* Verifica se ja existe codigo cadastrado */
     $sql_select = "SELECT COUNT(descricao_modelo) AS qtd FROM modelos WHERE codigo_modelo = :codigo_modelo";
     $stverifica = $pdo->prepare($sql_select);
     $stverifica->bindParam(':codigo_modelo', $codmodelo);
@@ -72,7 +75,7 @@ foreach ($dd as $dados) {
                }
         } else {
             $cod_error = 1;
-            $msg = " Usuário já Cadastro!";
+            $msg ="erro no cadastro";
         }
 
     } else {
@@ -96,7 +99,7 @@ foreach ($dd as $dados) {
         // Definimos a mensagem de sucesso
         $cod_error = 0;
         $msg = "Atualização Realizado com Sucesso!";
-        if(!@copy($caminho,'../public/imagens/modelos'.$codmodelo.".".$extensao))
+        if(!@copy($caminho,'../public/imagens/modelos/'.$codmodelo.".".$extensao))
         {
             $errors= error_get_last();
              "COPY ERROR: ".$errors['type'];
@@ -106,8 +109,8 @@ foreach ($dd as $dados) {
         }
     } else {
         $cod_error = 1;
-        $msg = " Usuário já Cadastro!";
+        $msg ="erro no cadastro";
     }
 }
 }
-echo $msg;
+ echo json_encode( $cod_error);

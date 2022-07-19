@@ -57,7 +57,7 @@ foreach ($dd as $dados) {
              $msg = "Cadastro Realizado com Sucesso!";
         } else {
             $cod_error = 1;
-             $msg = " Usuário já Cadastro!";
+             $msg ="erro no cadastro";
         }
 
     } else {
@@ -77,8 +77,8 @@ foreach ($dd as $dados) {
             $msg = "Cadastro Atualizado com Sucesso!";
         } else {
             $cod_error = 1;
-            $msg = " Usuário já Cadastro!";
+            $msg ="erro no cadastro";
         }
     }
 }
-echo $msg;
+ echo json_encode( $cod_error);

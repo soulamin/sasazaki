@@ -141,12 +141,11 @@ switch ($acao) {
 </a>
 <ul class="nav nav-treeview" style="display: none;">
 <li class="nav-item">
-<a href="#" class="nav-link btnImportProd">
+<a href="#" class="nav-link btnAtualizaDados">
 <i class="fa fa-exchange"></i>
-<p>Importar Produtos</p>
+<p>Atualiza dados</p>
 </a>
 </li>
-
     <li class="nav-item">
     <a href="#" class="nav-link">
     <i class="fa fa-calendar nav-icon btnAgendaAtualizacao"></i>
@@ -240,6 +239,13 @@ switch ($acao) {
         <p>Modelos</p>
         </a>
         </li>
+        <li class="nav-item btnAmbiente_Modelo">
+        <a href="#" class="nav-link">
+        <i class="fa fa-archive nav-icon "></i>
+        <p>Ambiente/Modelos </p>
+        </a>
+        </li>
+
 
     </ul>
   </li>
@@ -283,9 +289,9 @@ switch ($acao) {
 </a>
 <ul class="nav nav-treeview" style="display: none;">
 <li class="nav-item">
-<a href="#" class="nav-link btnImportProd">
+<a href="#" class="nav-link btnAtualizaDados">
 <i class="fa fa-exchange"></i>
-<p>Importar Produtos</p>
+<p>Atualiza dados</p>
 </a>
 </li>
 

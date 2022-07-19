@@ -36,8 +36,8 @@ foreach ($dd as $dados) {
      $caminho = $inf->{'caminho'};
      $codfoto = $inf->{'cod-foto'};
      $tipofoto = $inf->{'tipo-foto'};
-     $extensao = substr($caminho, -3);
-
+     $extensao = substr($caminho, -3)=='peg'?'jpeg':substr($caminho, -3);
+     
     /* Verifica se ja existe codigo cadastrado */
     $sql_select = "SELECT COUNT(codigo_foto) AS qtd FROM fotos WHERE codigo_foto = :codigo_foto";
     $stverifica = $pdo->prepare($sql_select);
@@ -76,7 +76,7 @@ foreach ($dd as $dados) {
 
         } else {
             $cod_error = 1;
-             $msg = " Usuário já Cadastro!";
+             $msg ="erro no cadastro";
         }
 
     } else {
@@ -94,6 +94,10 @@ foreach ($dd as $dados) {
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
             // Definimos a mensagem de sucesso
+         /*    if(file_exists( $caminho,'../public/imagens/'.$codfoto.".".$extensao)){
+                unlink($$caminho,'../public/imagens/'.$codfoto.".".$extensao);
+              }
+ */
 
             if(!@copy($caminho,'../public/imagens/'.$codfoto.".".$extensao))
             {
@@ -108,8 +112,8 @@ foreach ($dd as $dados) {
             $msg = "Cadastro Atualizado com Sucesso!";
         } else {
             $cod_error = 1;
-            $msg = " Usuário já Cadastro!";
+            $msg ="erro no cadastro";
         }
     }
 }
-echo $msg;
+ echo json_encode( $cod_error);

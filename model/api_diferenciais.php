@@ -3,6 +3,8 @@ require '../fontes/conexao.php';
 $username = "sistemas";
 $password = "sasazaki";
 
+
+
 $urlaut = "http://187.92.100.10:8180/api/esp/v1/sszk-diferenciais.r";
 $dados = array();
 $json = json_encode($dados);
@@ -57,7 +59,7 @@ foreach ($dd as $dados) {
              $msg = "Cadastro Realizado com Sucesso!";
         } else {
             $cod_error = 1;
-             $msg = " Usuário já Cadastro!";
+             $msg ="erro no cadastro";
         }
 
     } else {
@@ -70,7 +72,7 @@ foreach ($dd as $dados) {
         $statement = $pdo->prepare($sql_update);
         $statement->bindParam(':codigo_diferencial', $coddiferencial);
         $statement->bindParam(':descricao_diferencial', $descdiferencial);
-        $statement->bindParam(':conceito', $conceito);
+       
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
             // Definimos a mensagem de sucesso
@@ -78,8 +80,8 @@ foreach ($dd as $dados) {
             $msg = "Cadastro Atualizado com Sucesso!";
         } else {
             $cod_error = 1;
-            $msg = " Usuário já Cadastro!";
+            $msg ="erro no cadastro";
         }
     }
 }
-echo $msg;
+ echo json_encode( $cod_error);

@@ -21,7 +21,7 @@
                             <div class="col-md-12">
                                 <br>
                                 <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaUsuarios">
-                                    <thead class="bg-primary-gradient text-smYYYTYY">
+                                    <thead class="bg-primary-gradient text-sm">
                                         <th>Nome</th>
                                         <th>Login</th>
                                         <th>Tipo</th>

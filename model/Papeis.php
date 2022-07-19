@@ -54,7 +54,7 @@ switch ($acao) {
                 $msg = "Cadastro Realizado com Sucesso!";
             } else {
                 $cod_error = 1;
-                $msg = " Usuário já Cadastro!";
+                $msg ="erro no cadastro";
             }
         } else {
 

@@ -125,6 +125,12 @@ $(document).on("click",'.btnAgendaAtualizacao', function() {
     location.href ='../AgendaAtualizacao/';
 });
 
+//Botão para Parametros
+$(document).off("click",'.btnAtualizaDados');
+$(document).on("click",'.btnAtualizaDados', function() {
+    location.href ='../Atualizacao/';
+});
+
 //Botão para btnImportProd
 $(document).off("click",'.btnImportProd');
 $(document).on("click",'.btnImportProd', function() {

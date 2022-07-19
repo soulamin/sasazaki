@@ -107,7 +107,7 @@ foreach ($dd as $dados) {
             $msg = "Cadastro Realizado com Sucesso!";
         } else {
             $cod_error = 1;
-            $msg = " Usuário já Cadastro!";
+            $msg ="erro no cadastro";
         }
     } else {
         $sql_update = "UPDATE produtos SET id_linha =:id_linha,quantidade_folhas = :quantidade_folhas, batente_incluso =:batente_incluso, item_pai = :item_pai, 
@@ -152,9 +152,9 @@ foreach ($dd as $dados) {
             $msg = "Atualização Realizado com Sucesso!";
         } else {
             $cod_error = 1;
-            $msg = " Usuário já Cadastro!";
+            $msg ="erro no cadastro";
         }
     }
    
 }
-echo $msg;
+ echo json_encode( $cod_error);

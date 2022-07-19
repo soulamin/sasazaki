@@ -19,7 +19,7 @@
                             <div class="col-md-12 table-responsive text-sm"><br>
 
                                 <table class="table table-bordered table-striped dataTable  text-sm" id="TabelaUsuarios">
-                                    <thead class="bg-primary-gradient text-smYYYTYY">
+                                    <thead class="bg-primary-gradient text-sm">
 
                                         <th>Login</th>
                                         <th>Email</th>
