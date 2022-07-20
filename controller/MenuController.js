@@ -65,6 +65,11 @@ $(document).on("click",'.btnAmbientes', function() {
       location.href ='../Ambientes/';
 });
 
+//Botão para Ambientes
+$(document).off("click",'.btnAmbiente_Modelos');
+$(document).on("click",'.btnAmbiente_Modelos', function() {
+      location.href ='../AmbienteModelos/';
+});
 //Botão para btnLinhas
 $(document).off("click",'.btnLinhas');
 $(document).on("click",'.btnLinhas', function() {
@@ -77,7 +82,6 @@ $(document).off("click",'.btnCategorias');
 $(document).on("click",'.btnCategorias', function() {
     location.href ='../Categorias/';
 });
-
 
 
 //Botão para Log Digital
