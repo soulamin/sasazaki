@@ -113,4 +113,4 @@ foreach ($dd as $dados) {
     }
 }
 }
- echo json_encode( $cod_error);
+

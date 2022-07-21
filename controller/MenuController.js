@@ -159,15 +159,11 @@ $(document).on("click",'.btnUsuarios', function() {
     location.href ='../Usuarios/';
 });
 
-
-
 //Botão para Analytics
 $(document).off("click",'.btnAnalytics');
 $(document).on("click",'.btnAnalytics', function() {
     location.href ='../Analytics/';
 });
-
-
 
 
 //Botão para  Taxas

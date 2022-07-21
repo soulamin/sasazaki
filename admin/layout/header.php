@@ -26,6 +26,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.css" rel="stylesheet" />
+    <style>
+    .blink {  animation: blink 3s infinite;}
+    @keyframes blink {  0% {    opacity: 1;  }  
+    100% {    opacity: 0;    color: blue;  }
+}</style>
 </head>
 <body    class="hold-transition sidebar-mini">
 <div class="wrapper">

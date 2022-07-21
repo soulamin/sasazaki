@@ -239,7 +239,7 @@ switch ($acao) {
         <p>Modelos</p>
         </a>
         </li>
-        <li class="nav-item btnAmbiente_Modelo">
+        <li class="nav-item btnAmbiente_Modelos">
         <a href="#" class="nav-link">
         <i class="fa fa-archive nav-icon "></i>
         <p>Ambiente/Modelos </p>

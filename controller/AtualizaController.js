@@ -209,7 +209,7 @@ function Salva_Atualizacao(){
 			if(data['cod_error']==0){
 				
 				Busca_Atualizacao();
-				const fechaloading = setTimeout(fechamodal, 5000);
+				const fechaloading = setTimeout(fechamodal, 1000);
 			}
 	}, "json");
 

@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Atualiza Dados</h3>
+                        <h3 class="card-title ">Atualiza Dados</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -45,8 +45,8 @@
                         </div>
                         <div class="modal-body">
                             <div class="row"> 
-                                <div class="col-md-12 text-center text-lg">
-                                <b>AGUARDE, ATUALIZANDO DADOS ...</b>
+                                <div class="col-md-12 text-center text-lg blink" >
+                                <b class="blink">AGUARDE, ATUALIZANDO DADOS ...</b>
                                 </div>
                                  
                             </div>

@@ -1,6 +1,6 @@
 <?php
 include 'api_acabamentos.php';
-include 'api_ambientes.php';
+ include 'api_ambientes.php';
 include 'api_categorias.php';
 include 'api_cores.php';
 include 'api_diferenciais.php';
@@ -24,7 +24,7 @@ include 'api_produtos_tratamentos.php';
 include 'api_produtos_vidros.php';
 include 'api_produtos.php';
 include 'api_tratamentos.php';
-include 'api_vidros.php';
+include 'api_vidros.php'; 
 
 $resultado['cod_error'] = 0;
 echo json_encode($resultado);
