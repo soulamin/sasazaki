@@ -69,12 +69,7 @@ INSERT INTO `ambientes` (`id`, `nome_ambiente`, `codigo_ambiente`) VALUES
 (3, 'Fachada', 'amb-0003'),
 (4, 'Cozinha', 'amb-0004'),
 (5, 'Banheiro', 'amb-0005'),
-(6, 'Não se aplica', 'amb-0006'),
-(7, ' Cozinha', 'amb-0007'),
-(8, ' Banheiro', 'amb-0008'),
 (9, 'Sala', 'amb-0009'),
-(10, ' Quarto', 'amb-0010'),
-(11, ' Fachada', 'amb-0011'),
 (12, 'Não se aplica', 'nsa-0001');
 
 -- --------------------------------------------------------
