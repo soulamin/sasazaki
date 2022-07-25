@@ -8,7 +8,11 @@
  */
 require '../../fontes/conexao.php';
 
-        $stmt = $pdo->prepare('SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,f.tipo_foto,f.caminho,
+$itempai     = $_GET['itempai'];
+$codproduto  = $_GET['codproduto'];
+$itcodigo    = $_GET['itcodigo'];
+
+$stmt = $pdo->prepare('SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,f.tipo_foto,f.caminho,
                                             d.descricao_diferencial ,c.nome_cor FROM produtos p
                                             INNER JOIN produtos_vidros pv ON pv.codigo_produto=p.codigo_produto
                                             INNER JOIN produtos_opcionais po ON po.codigo_produto=p.codigo_produto
@@ -19,14 +23,18 @@ require '../../fontes/conexao.php';
                                             INNER JOIN modelos m ON m.codigo_modelo=p.codigo_modelo
                                             INNER JOIN cores c ON c.codigo_cor=p.codigo_cor
                                             INNER JOIN opcionais o ON po.codigo_opcional=o.codigo_opcional
-                                            INNER JOIN diferenciais d ON pd.codigo_diferencial=d.codigo_diferencial');
-        $executa = $stmt->execute();
-        $produtos = array();
+                                            INNER JOIN diferenciais d ON pd.codigo_diferencial=d.codigo_diferencial
+                                            WHERE p.item_pai = :itempai AND p.codigo_produto = :codigoproduto AND p.it_codigo= :itcodigo ');
+$stmt->bindParam(':itempai', $itempai);
+$stmt->bindParam(':codigoproduto', $codproduto);
+$stmt->bindParam(':itcodigo', $itcodigo);
+$executa = $stmt->execute();
+$produtos = array();
 
-        while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          
-            array_push($produtos, $linha);
-        }
+while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        $Resultado['produtos'] = $produtos;
-        echo json_encode($Resultado);
+    array_push($produtos, $linha);
+}
+
+$Resultado['produtos'] = $produtos;
+echo json_encode($Resultado);
