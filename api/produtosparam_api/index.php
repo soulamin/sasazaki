@@ -8,9 +8,9 @@
  */
 require '../../fontes/conexao.php';
 
-$codproduto  = 'p.codigo_produto = "'.$_GET['codproduto'].'"';
-$itempai     = isset($_GET['itempai'])? ' AND p.item_pai = '.$_GET['itempai'].' ' : "";
-$itcodigo    = isset($_GET['itcodigo'])? ' AND p.item_codigo = '.$_GET['itcodigo'] : ""; 
+$codproduto  = isset($_GET['codproduto'])? ' AND p.codigo_produto = "'.$_GET['codproduto'].'"':"";
+$itempai     = isset($_GET['itempai'])   ? ' AND p.item_pai = "'.$_GET['itempai'].'"' : "";
+$itcodigo    = 'p.it_codigo = "'.$_GET['itcodigo'].'"'; 
 
 
  $stmt = $pdo->prepare("SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,f.tipo_foto,f.caminho,
@@ -25,11 +25,8 @@ $itcodigo    = isset($_GET['itcodigo'])? ' AND p.item_codigo = '.$_GET['itcodigo
                                             INNER JOIN cores c ON c.codigo_cor=p.codigo_cor
                                             INNER JOIN opcionais o ON po.codigo_opcional=o.codigo_opcional
                                             INNER JOIN diferenciais d ON pd.codigo_diferencial=d.codigo_diferencial
-                                            WHERE ".$codproduto.$itempai.$itcodigo);
+                                            WHERE ".$itcodigo.$codproduto.$itempai);
 
-/* $stmt->bindParam(':itempai', $itempai);.'$codproduto'.
-$stmt->bindParam(':codigoproduto', $codproduto);
-$stmt->bindParam(':itcodigo', $itcodigo); */
 $executa = $stmt->execute();
 $produtos = array();
 
