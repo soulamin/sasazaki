@@ -8,11 +8,12 @@
  */
 require '../../fontes/conexao.php';
 
-$itempai     = $_GET['itempai'];
-$codproduto  = $_GET['codproduto'];
-$itcodigo    = $_GET['itcodigo'];
+$codproduto  = 'p.codigo_produto = "'.$_GET['codproduto'].'"';
+$itempai     = isset($_GET['itempai'])? ' AND p.item_pai = '.$_GET['itempai'].' ' : "";
+$itcodigo    = isset($_GET['itcodigo'])? ' AND p.item_codigo = '.$_GET['itcodigo'] : ""; 
 
-$stmt = $pdo->prepare('SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,f.tipo_foto,f.caminho,
+
+ $stmt = $pdo->prepare("SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,f.tipo_foto,f.caminho,
                                             d.descricao_diferencial ,c.nome_cor FROM produtos p
                                             INNER JOIN produtos_vidros pv ON pv.codigo_produto=p.codigo_produto
                                             INNER JOIN produtos_opcionais po ON po.codigo_produto=p.codigo_produto
@@ -24,10 +25,11 @@ $stmt = $pdo->prepare('SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo
                                             INNER JOIN cores c ON c.codigo_cor=p.codigo_cor
                                             INNER JOIN opcionais o ON po.codigo_opcional=o.codigo_opcional
                                             INNER JOIN diferenciais d ON pd.codigo_diferencial=d.codigo_diferencial
-                                            WHERE p.item_pai = :itempai AND p.codigo_produto = :codigoproduto AND p.it_codigo= :itcodigo ');
-$stmt->bindParam(':itempai', $itempai);
+                                            WHERE ".$codproduto.$itempai.$itcodigo);
+
+/* $stmt->bindParam(':itempai', $itempai);.'$codproduto'.
 $stmt->bindParam(':codigoproduto', $codproduto);
-$stmt->bindParam(':itcodigo', $itcodigo);
+$stmt->bindParam(':itcodigo', $itcodigo); */
 $executa = $stmt->execute();
 $produtos = array();
 
