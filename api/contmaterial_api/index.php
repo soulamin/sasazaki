@@ -19,7 +19,7 @@ $stmt = $pdo->prepare("SELECT COUNT(m.id) as quantidade , m.codigo_material ,
                                                                INNER JOIN ambientes a ON a.codigo_ambiente =  pa.codigo_ambiente
                                                                WHERE ".$codambiente.$codmodelo."
                                                                GROUP BY m.codigo_material");
-var_dump($stmt);
+
 $executa = $stmt->execute();
 $material = array();
 
