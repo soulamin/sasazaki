@@ -27,7 +27,7 @@ $dd = $j->items[0]->{'v-ds-tabelas'}->{'tt-sk-produto'};
 
 foreach ($dd as $dados) {
     $inf = $dados;
-    json_encode($inf);
+      json_encode($inf);
 
       $idlinha = $inf->{'cod-linha'};
       $qtdefolhas = $inf->{'qtde-folhas'};
@@ -65,13 +65,13 @@ foreach ($dd as $dados) {
     if ($linha['qtd'] == 0) {
 
         $sql_insert = "INSERT INTO  produtos (id_linha,quantidade_folhas, batente_incluso, codigo_produto, item_pai, 
-                    tipo_abertura, largura, largura_livre, :quantidade_bascula, descricao_produto, garantia, possui_trinco,
+                    tipo_abertura, largura, largura_livre, quantidade_bascula, descricao_produto, garantia, possui_trinco,
                     altura_livre, altura, batente, voltagem, it_codigo, codigo_modelo, codigo_cor, quantidade_folhas_fixas,
-                    id_fechadura,linkqrcode)
+                    id_fechadura,codigo_material,linkqrcode)
                      VALUES (:id_linha,:quantidade_folhas, :batente_incluso, :codigo_produto, :item_pai, 
                     :tipo_abertura, :largura, :largura_livre, :quantidade_bascula, :descricao_produto, :garantia, :possui_trinco,
                     :altura_livre, :altura, :batente, :voltagem, :it_codigo, :codigo_modelo, :codigo_cor, :quantidade_folhas_fixas,
-                    :id_fechadura,:linkqrcode) ";
+                    :id_fechadura, :codigo_material ,:linkqrcode) ";
 
         // Prepara uma senten�a para ser executada                                               
         $statement = $pdo->prepare($sql_insert);
@@ -97,15 +97,18 @@ foreach ($dd as $dados) {
         $statement->bindParam(':codigo_cor', $codcor);
         $statement->bindParam(':quantidade_folhas_fixas', $qtdefolhasfixas);
         $statement->bindParam(':id_fechadura', $codfechadura);
+        $statement->bindParam(':codigo_material', $codmaterial);
         $statement->bindParam(':linkqrcode', $linkqrcode);
 
 
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
+            
             // Definimos a mensagem de sucesso
             $cod_error = 0;
             $msg = "Cadastro Realizado com Sucesso!";
         } else {
+            print_r($statement->errorInfo());
             $cod_error = 1;
             $msg ="erro no cadastro";
         }
@@ -116,7 +119,7 @@ foreach ($dd as $dados) {
                                     descricao_produto=:descricao_produto, garantia=:garantia,possui_trinco =:possui_trinco,
                                     altura_livre = :altura_livre, altura=:altura,batente = :batente, voltagem=:voltagem, it_codigo=:it_codigo, 
                                     codigo_modelo = :codigo_modelo, codigo_cor = :codigo_cor, quantidade_folhas_fixas = :quantidade_folhas_fixas,
-                                    id_fechadura=:id_fechadura ,  linkqrcode=:linkqrcode WHERE codigo_produto =:codigo_produto";
+                                    id_fechadura=:id_fechadura , codigo_material=:codigo_material,  linkqrcode=:linkqrcode WHERE codigo_produto =:codigo_produto";
 
         // Prepara uma senten�a para ser executada                                               
         $statement = $pdo->prepare($sql_update);
@@ -142,6 +145,7 @@ foreach ($dd as $dados) {
         $statement->bindParam(':codigo_cor', $codcor);
         $statement->bindParam(':quantidade_folhas_fixas', $qtdefolhasfixas);
         $statement->bindParam(':id_fechadura', $codfechadura);
+        $statement->bindParam(':codigo_material', $codmaterial);
         $statement->bindParam(':linkqrcode', $linkqrcode);
 
 
