@@ -37,7 +37,7 @@ foreach ($dd as $dados) {
      $codfoto = $inf->{'cod-foto'};
      $tipofoto = $inf->{'tipo-foto'};
      $extensao = substr($caminho, -3)=='peg'?'jpeg':substr($caminho, -3);
-     
+     $caminholocal = "public/imagens/".$codfoto.".".$extensao ;
     /* Verifica se ja existe codigo cadastrado */
     $sql_select = "SELECT COUNT(codigo_foto) AS qtd FROM fotos WHERE codigo_foto = :codigo_foto";
     $stverifica = $pdo->prepare($sql_select);
@@ -47,8 +47,8 @@ foreach ($dd as $dados) {
 
     if ($linha['qtd'] == 0) {
       
-        $sql_insert = "INSERT INTO fotos(codigo_foto,tipo_foto ,caminho, sequencia)
-                                 VALUES (:codigo_foto,:tipo_foto ,:caminho,:sequencia) ";
+        $sql_insert = "INSERT INTO fotos(codigo_foto,tipo_foto ,caminho,caminholocal, sequencia)
+                                 VALUES (:codigo_foto,:tipo_foto ,:caminho,:caminholocal,:sequencia) ";
 
         // Prepara uma senten�a para ser executada                                               
         $statement = $pdo->prepare($sql_insert);
@@ -56,6 +56,7 @@ foreach ($dd as $dados) {
         $statement->bindParam(':tipo_foto', $tipofoto);
         $statement->bindParam(':caminho', $caminho);
         $statement->bindParam(':sequencia', $sequencia);
+        $statement->bindParam(':caminholocal', $caminholocal);
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
             // Definimos a mensagem de sucesso
@@ -82,7 +83,8 @@ foreach ($dd as $dados) {
     } else {
 
 
-        $sql_update = "UPDATE fotos SET tipo_foto=:tipo_foto ,caminho=:caminho, sequencia=:sequencia
+        $sql_update = "UPDATE fotos SET tipo_foto=:tipo_foto ,caminho=:caminho, caminholocal=:caminholocal, 
+                                               sequencia=:sequencia
                                                 WHERE codigo_foto=:codigo_foto";
 
         // Prepara uma senten�a para ser executada                                               
@@ -90,6 +92,7 @@ foreach ($dd as $dados) {
         $statement->bindParam(':codigo_foto', $codfoto);
         $statement->bindParam(':tipo_foto', $tipofoto);
         $statement->bindParam(':caminho', $caminho);
+        $statement->bindParam(':caminholocal', $caminholocal);
         $statement->bindParam(':sequencia', $sequencia);
         // Executa a senten�a j� com os valores
         if ($statement->execute()) {
