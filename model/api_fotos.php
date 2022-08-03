@@ -37,7 +37,7 @@ foreach ($dd as $dados) {
      $codfoto = $inf->{'cod-foto'};
      $tipofoto = $inf->{'tipo-foto'};
      $extensao = substr($caminho, -3)=='peg'?'jpeg':substr($caminho, -3);
-     $caminholocal = "public/imagens/".$codfoto.".".$extensao ;
+     $caminholocal = "public/imagens/fotos/".$codfoto.".".$extensao ;
     /* Verifica se ja existe codigo cadastrado */
     $sql_select = "SELECT COUNT(codigo_foto) AS qtd FROM fotos WHERE codigo_foto = :codigo_foto";
     $stverifica = $pdo->prepare($sql_select);

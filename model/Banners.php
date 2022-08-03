@@ -29,7 +29,7 @@ switch ($acao) {
         if ((!empty($titulo)) && (!empty($totens)) && (!empty($texto))) {
 
 
-            $imagem = "public/banners/" . $titulo . "." . $extensao;
+            $imagem = "public/imagens/banners/" . $titulo . "." . $extensao;
 
 
             if (!@copy($foto['tmp_name'],  '../'.$imagem)) {
