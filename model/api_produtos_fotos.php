@@ -34,9 +34,12 @@ foreach ($dd as $dados) {
 
 
     /* Verifica se ja existe codigo cadastrado */
-    $sql_select = "SELECT COUNT(codigo_produto) AS qtd FROM produtos_fotos WHERE codigo_produto = :codigo_produto ";
+    $sql_select = "SELECT COUNT(codigo_produto) AS qtd FROM produtos_fotos 
+                                        WHERE codigo_produto = :codigo_produto AND codigo_foto = :codigo_foto  ";
     $stverifica = $pdo->prepare($sql_select);
     $stverifica->bindParam(':codigo_produto', $codproduto);
+    $stverifica->bindParam(':codigo_foto', $codfoto);
+
     $stverifica->execute();
     $linha =  $stverifica->fetch();
 

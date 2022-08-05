@@ -63,7 +63,7 @@ foreach ($dd as $dados) {
             $cod_error = 0;
              $msg = "Cadastro Realizado com Sucesso!";
 
-             if(!@copy($caminho,'../public/imagens/'.$codfoto.".".$extensao))
+             if(!@copy($caminho,'../public/imagens/fotos/'.$codfoto.".".$extensao))
              {
                     $errors= error_get_last();
                      "COPY ERROR: ".$errors['type'];

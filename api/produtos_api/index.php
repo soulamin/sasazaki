@@ -15,7 +15,7 @@ require '../../fontes/conexao.php';
                                             INNER JOIN produtos_diferenciais pd ON pd.codigo_produto=p.codigo_produto
                                             INNER JOIN produtos_fotos pf ON pf.codigo_produto=p.codigo_produto
                                             INNER JOIN vidros v ON pv.codigo_vidro=v.codigo_vidro
-                                            INNER JOIN  fotos f ON f.codigo_foto=pf.codigo_foto
+                                            INNER JOIN  fotos f ON f.codigo_foto = pf.codigo_foto
                                             INNER JOIN modelos m ON m.codigo_modelo=p.codigo_modelo
                                             INNER JOIN cores c ON c.codigo_cor=p.codigo_cor
                                             INNER JOIN opcionais o ON po.codigo_opcional=o.codigo_opcional

@@ -31,14 +31,12 @@ $nome_cor     = isset($_GET['cor'])   ? ' AND p.nome_cor like  "'.$_GET['cor'].'
 $itcodigo    = 'p.it_codigo = "'.$_GET['itcodigo'].'"'; 
 
 
- $stmt = $pdo->prepare("SELECT p.*, l.nome_linha, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,i.nome_material,pf.codigo_foto,
+ $stmt = $pdo->prepare("SELECT p.*, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,i.nome_material,
                                             d.descricao_diferencial ,c.nome_cor FROM produtos p
                                             INNER JOIN produtos_vidros pv ON pv.codigo_produto=p.codigo_produto
                                             INNER JOIN produtos_opcionais po ON po.codigo_produto=p.codigo_produto
                                             INNER JOIN produtos_diferenciais pd ON pd.codigo_produto=p.codigo_produto
-                                            INNER JOIN produtos_fotos pf ON pf.codigo_produto=p.codigo_produto
                                             INNER JOIN vidros v ON pv.codigo_vidro=v.codigo_vidro
-                                            INNER JOIN linhas l ON l.codigo_linha=p.id_linha
                                             INNER JOIN modelos m ON m.codigo_modelo=p.codigo_modelo
                                             INNER JOIN materiais i ON i.codigo_material=p.codigo_material
                                             INNER JOIN cores c ON c.codigo_cor=p.codigo_cor
@@ -54,14 +52,18 @@ $produtos = array();
 
 while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
     
-   
-    $stft = $pdo->prepare("SELECT *  FROM fotos WHERE codigo_foto =:codigo_foto");
-    $stft->bindParam(':codigo_foto', $linha['codigo_foto']);
+    $stft = $pdo->prepare("SELECT f.*  FROM fotos f
+                                       INNER JOIN produtos_fotos pf  ON f.codigo_foto = pf.codigo_foto
+                                        WHERE pf.codigo_produto LIKE :codigo_produto");
+    $stft->bindParam(':codigo_produto', $linha['codigo_produto']);
     $stft->execute();
     while ($lft = $stft->fetch(PDO::FETCH_ASSOC)) {
+       
         array_push($linha, $lft);
-    } 
+       
+    }
     array_push($produtos, $linha);
+  
 }
 
 $Resultado['produtos'] = $produtos;
