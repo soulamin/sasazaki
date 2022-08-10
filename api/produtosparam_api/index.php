@@ -8,9 +8,9 @@
  */
 require '../../fontes/conexao.php';
 
+$itempai             = isset($_GET['itempai'])   ? ' p.item_pai = "'.$_GET['itempai'].'"' : "";
 $codproduto          = isset($_GET['codproduto'])? ' AND p.codigo_produto = "'.$_GET['codproduto'].'"':"";
 $quantidade_folhas   = isset($_GET['qtdfolhas'])   ? ' AND p.quantidade_folhas = "'.$_GET['qtdfolhas'].'"' : "";
-$itempai             = isset($_GET['itempai'])   ? ' AND p.item_pai = "'.$_GET['itempai'].'"' : "";
 $batente_incluso     = isset($_GET['bat'])? ' AND p.batente_incluso = "'.$_GET['bat'].'"':"";
 $tipo_abertura       = isset($_GET['tpabertura'])   ? ' AND p.tipo_abertura = "'.$_GET['tpabertura'].'"' : "";
 $largura             = isset($_GET['largura'])   ? ' AND p.largura = "'.$_GET['largura'].'"' : "";
@@ -28,7 +28,9 @@ $quantidade_folhas_fixas  = isset($_GET['qtdfolhasfixa'])? ' AND p.quantidade_fo
 $tipo_vidro     = isset($_GET['tpvidro'])   ? ' AND p.tipo_vidro LIKE "'.$_GET['tpvidro'].'"' : "";
 $tipo_foto    = isset($_GET['tpfoto'])   ? ' AND p.tipo_foto like  "'.$_GET['tpfoto'].'"' : "";
 $nome_cor     = isset($_GET['cor'])   ? ' AND p.nome_cor like  "'.$_GET['cor'].'"' : "";
-$itcodigo    = 'p.it_codigo = "'.$_GET['itcodigo'].'"'; 
+$itcodigo    = isset($_GET['itcodigo'])   ? ' AND p.it_codigo = "'.$_GET['itcodigo'].'"' : "";
+
+
 
 
  $stmt = $pdo->prepare("SELECT p.*,l.nome_linha, v.tipo_vidro , o.nome_opcional ,m.nome_modelo,i.nome_material,
@@ -43,7 +45,7 @@ $itcodigo    = 'p.it_codigo = "'.$_GET['itcodigo'].'"';
                                             INNER JOIN cores c ON c.codigo_cor=p.codigo_cor
                                             INNER JOIN opcionais o ON po.codigo_opcional=o.codigo_opcional
                                             INNER JOIN diferenciais d ON pd.codigo_diferencial=d.codigo_diferencial
-                                            WHERE ".$itcodigo.$codproduto.$itempai.$nome_cor.$quantidade_folhas.$batente_incluso
+                                            WHERE ".$itempai.$codproduto.$itcodigo.$nome_cor.$quantidade_folhas.$batente_incluso
                                             .$tipo_abertura.$largura.$largura_livre.$quantidade_bascula.$garantia.$possui_trinco
                                             .$altura.$batente.$altura_livre.$codigo_modelo.$quantidade_folhas_fixas.$codigo_material.
                                             $codigo_cor.$tipo_vidro.$tipo_foto.$nome_cor);
