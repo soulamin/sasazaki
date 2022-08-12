@@ -8,6 +8,8 @@
  */
 require '../../fontes/conexao.php';
 
+
+
 $itempai             = isset($_GET['itempai'])   ? ' p.item_pai = "'.$_GET['itempai'].'"' : "";
 $codproduto          = isset($_GET['codproduto'])? ' AND p.codigo_produto = "'.$_GET['codproduto'].'"':"";
 $quantidade_folhas   = isset($_GET['qtdfolhas'])   ? ' AND p.quantidade_folhas = "'.$_GET['qtdfolhas'].'"' : "";
@@ -28,7 +30,7 @@ $quantidade_folhas_fixas  = isset($_GET['qtdfolhasfixa'])? ' AND p.quantidade_fo
 $tipo_vidro     = isset($_GET['tpvidro'])   ? ' AND p.tipo_vidro LIKE "'.$_GET['tpvidro'].'"' : "";
 $tipo_foto    = isset($_GET['tpfoto'])   ? ' AND p.tipo_foto like  "'.$_GET['tpfoto'].'"' : "";
 $nome_cor     = isset($_GET['cor'])   ? ' AND p.nome_cor like  "'.$_GET['cor'].'"' : "";
-$itcodigo    = isset($_GET['itcodigo'])   ? ' AND p.it_codigo = "'.$_GET['itcodigo'].'"' : "";
+$itcodigo    = isset($_GET['itcodigo'])   ? ' p.it_codigo = "'.$_GET['itcodigo'].'"' : "";
 
 
 
@@ -52,17 +54,23 @@ $itcodigo    = isset($_GET['itcodigo'])   ? ' AND p.it_codigo = "'.$_GET['itcodi
 
 $executa = $stmt->execute();
 $produtos = array();
+$fotos = [];
 
 while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
     
     $stft = $pdo->prepare("SELECT f.*  FROM fotos f
                                        INNER JOIN produtos_fotos pf  ON f.codigo_foto = pf.codigo_foto
-                                        WHERE pf.codigo_produto LIKE :codigo_produto");
+                                        WHERE pf.codigo_produto LIKE :codigo_produto and f.sequencia in (1,3)");
     $stft->bindParam(':codigo_produto', $linha['codigo_produto']);
     $stft->execute();
     while ($lft = $stft->fetch(PDO::FETCH_ASSOC)) {
        
-        array_push($linha, $lft);
+       if($lft['tipo_foto'] == 'Ambientação'){
+            $linha['ambientacao'] = $lft;
+       }else{
+            $linha['foto_produto'] = $lft;
+       }
+        
        
     }
     array_push($produtos, $linha);
