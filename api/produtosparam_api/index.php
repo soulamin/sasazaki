@@ -58,7 +58,7 @@ $fotos = [];
 
 while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
     
-    $stft = $pdo->prepare("SELECT f.*  FROM fotos f
+    $stft = $pdo->prepare("SELECT f.id, f.tipo_foto, f.sequencia, f.caminholocal, f.codigo_foto FROM fotos f
                                        INNER JOIN produtos_fotos pf  ON f.codigo_foto = pf.codigo_foto
                                         WHERE pf.codigo_produto LIKE :codigo_produto and f.sequencia in (1,3)");
     $stft->bindParam(':codigo_produto', $linha['codigo_produto']);
