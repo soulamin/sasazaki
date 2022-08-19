@@ -8,17 +8,16 @@
  */
 require '../../fontes/conexao.php';
 
-        $stmt = $pdo->prepare('SELECT * FROM Categorias');
-        $executa = $stmt->execute();
-        $Categorias = array();
+$stmt = $pdo->prepare('SELECT * FROM Categorias');
+$executa = $stmt->execute();
+$Categorias = array();
 
-        while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          
-            array_push($Categorias, $linha);
-        }
+while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    array_push($Categorias, $linha);
+}
 
-        $Resultado['categorias'] = $Categorias;
-        echo json_encode($Resultado);
+$Resultado['categorias'] = $Categorias;
+echo json_encode($Resultado);
 
         
 

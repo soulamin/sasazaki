@@ -26,7 +26,7 @@ $sql = 'SELECT p.descricao_produto
         ,v.tipo_vidro 
         ,m.nome_modelo
         ,f.tipo_foto
-        ,f.caminho
+        ,f.caminholocal as caminho
         ,c.nome_cor
         ,l.nome_linha
         ,m1.nome_material
