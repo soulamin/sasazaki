@@ -34,7 +34,25 @@ while ($linha = $stmt_opc->fetch(PDO::FETCH_ASSOC)) {
 
         while($linha_final = $stmt->fetch(PDO::FETCH_ASSOC))
         {                       
-            array_push($produtos, $linha_final);
+
+            $stft = $pdo->prepare("SELECT f.id, f.tipo_foto, f.sequencia, f.caminholocal, f.codigo_foto FROM fotos f
+            INNER JOIN produtos_fotos pf  ON f.codigo_foto = pf.codigo_foto
+             WHERE pf.codigo_produto LIKE :codigo_produto and f.sequencia in (1,3)");
+            
+            $stft->bindParam(':codigo_produto', $linha_final['codigo_produto']);
+            $stft->execute();
+
+            while ($lft = $stft->fetch(PDO::FETCH_ASSOC)) {
+       
+                if($lft['tipo_foto'] == 'Ambientação'){
+                     $linha_final['ambientacao'] = $lft;
+                }else{
+                     $linha_final['foto_produto'] = $lft;
+                }
+                array_push($produtos, $linha_final);
+            }
+
+            
         }
        
         //$stmt->bindParam(':it_codigo', $linha_opc['it_codigo']);
