@@ -32,6 +32,11 @@ foreach ($dd as $dados) {
     $inf = $dados;
     json_encode($inf);
 
+    if($inf->{'caminho'} == "")
+    {
+        continue;
+    }
+
      $sequencia = $inf->{'sequencia'};
      $caminho = $inf->{'caminho'};
      $codfoto = $inf->{'cod-foto'};
@@ -62,6 +67,8 @@ foreach ($dd as $dados) {
             // Definimos a mensagem de sucesso
             $cod_error = 0;
              $msg = "Cadastro Realizado com Sucesso!";
+
+             
 
              if(!@copy($caminho,'../public/imagens/fotos/'.$codfoto.".".$extensao))
              {
