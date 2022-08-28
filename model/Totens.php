@@ -19,13 +19,13 @@ switch ($acao) {
         $Responsavel = $_POST['txt_nomeresponsavel'];
         $Endereco = $_POST['txt_endereco'];
         $Municipio = $_POST['txt_municipio'];
-        $Consultor = $_POST['txt_consultor'];
-        $Segundo = $_POST['txt_segundos'];
-        $Tipo = $_POST['txt_tipo'];
-        $Revenda = $_POST['txt_revenda'];
-        $Pbshop = $_POST['txt_pbshop'];
-        $Engenharia = $_POST['txt_engenharia'];
-        $Exportacao = $_POST['txt_exportacao'];
+        //$Consultor = $_POST['txt_consultor'];
+        //$Segundo = $_POST['txt_segundos'];
+        //$Tipo = $_POST['txt_tipo'];
+        //$Revenda = $_POST['txt_revenda'];
+        //$Pbshop = $_POST['txt_pbshop'];
+        //$Engenharia = $_POST['txt_engenharia'];
+        //$Exportacao = $_POST['txt_exportacao'];
         $Status = "a";//ativo
     
 
@@ -42,7 +42,7 @@ switch ($acao) {
             $statement->bindParam(':nome_responsavel', $Responsavel);
             $statement->bindParam(':endereco', $Endereco);
             $statement->bindParam(':fk_municipio_id', $Municipio);
-            $statement->bindParam(':fk_consultor_id', $Consultor);
+            //$statement->bindParam(':fk_consultor_id', $Consultor);
             $statement->bindParam(':status', $Status);
            
 
