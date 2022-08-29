@@ -146,7 +146,7 @@ switch ($acao) {
             $idgrupototens = $linha['idgrupototens'];
 
             $stmtmu = $pdo->prepare('SELECT nome_da_loja  FROM grupo_totens g
-                                                   INNER JOIN lojas l ON l.totem_id=g.id_totens WHERE g.id_grupo =:idgrupototens');
+                                                   INNER JOIN totens l ON l.totem_id=g.id_totens WHERE g.id_grupo =:idgrupototens');
             $stmtmu->bindParam(":idgrupototens", $idgrupototens);
             $stmtmu->execute();
             $totens ="";
@@ -182,7 +182,7 @@ switch ($acao) {
     case 'Formulario_Toten':
 
         $Toten = $_POST['txt_codigo'];
-        $stmt = $pdo->prepare('SELECT * FROM lojas  WHERE totem_id = :Toten');
+        $stmt = $pdo->prepare('SELECT * FROM totens  WHERE totem_id = :Toten');
         $stmt->bindParam(':Toten', $Toten);
         $executa = $stmt->execute();
 
@@ -246,7 +246,7 @@ switch ($acao) {
 
     case 'Combobox_Totem':
 
-        $statement = $pdo->prepare('SELECT * FROM lojas WHERE status ="a"');
+        $statement = $pdo->prepare('SELECT * FROM totens WHERE status ="a"');
         $statement->execute();
         $Totem = array();
         $t = '';
