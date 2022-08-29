@@ -62,7 +62,7 @@
                                 <div class="modal-footer">
                                     <button class="btn btn-md btn-success" type="submit" id="btnSalvar"><i class="fa fa-save"></i> Salvar </button>
                                 </div>
-                                <form>
+</form>
                         </div>
                     </div>
                 </div>
@@ -80,29 +80,31 @@
                         <div class="modal-body">
                             <form id="FrmAlterarGrupoTotens" method="post" action="" enctype="multipart/form-data">
                                 <div class="row">
+                                    <input class="form-control" type="hidden" name='atxt_idgrupototens' id='atxt_idgrupototens'><br>
+
                                     <div class="col-md-12">
                                         <label>Nome Grupo de Totens</label>
                                         <input class="form-control" type="text" name='atxt_nomegrupototens' id='atxt_nomegrupototens'><br>
                                     </div>
 
-                                    <div class="col-md-12 row" style="border: 1px solid #dddddd">
+                                    <!-- <div class="col-md-12 row" style="border: 1px solid #dddddd">
                                         <div class="col-md-12">
                                             <label class="text-lg">Adicionar Totens</label><br>
                                             <select class="listatotens selectmultiplo" style="width:100%" name="txt_listatotem[]" multiple="multiple"></select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="modal-footer text-center">
-                                 
-                                    <button class="btn btn-lg btn-success" type="submit" id="btnAlterar"><i class="fa fa-save"></i> Alterar </button>
+                                    <button class="btn btn-lg btn-success" id="btnAlterar"><i class="fa fa-save"></i> Alterar </button>
+
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-----------------------------------FIM FORMULARIO EDITAR------------------------------------------------------>
-            <?php
-            $hr = time();
-            include '../layout/footer.php';
-            echo '<script src="../../controller/GrupoTotenController.js?' . $hr . '"></script>';
-            ?>
+                <!-----------------------------------FIM FORMULARIO EDITAR------------------------------------------------------>
+                <?php
+                $hr = time();
+                include '../layout/footer.php';
+                echo '<script src="../../controller/GrupoTotenController.js?' . $hr . '"></script>';
+                ?>

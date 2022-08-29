@@ -157,9 +157,8 @@ function Formulario_GrupoToten(idgrupototen) {
 		idgrupototen: idgrupototen
 	}, function(data) {
 	$('#ModalEditarGrupoToten').modal("show");
-	$('#atxt_codigo').val(data['Html']['Codigo']);
-    $('#atxt_login').val(data['Html']['nome']);
-	$('#atxt_email').val(data['Html']['Email']);
+	$('#atxt_idgrupototens').val(data['Html']['Codigo']);
+    $('#atxt_nomegrupototens').val(data['Html']['NomeGrupo']);
 
 	}, "json");
 
@@ -229,20 +228,19 @@ function Salva_GrupoTotens() {
 }
 
 
-
 //função para Alterar Toten
-function Altera_Toten(){
-	$('#FrmAlterarToten').ajaxForm({
-		url : '../../model/Totens.php',
+function Altera_GrupoTotens(){
+	$('#FrmAlterarGrupoTotens').ajaxForm({
+		url : '../../model/GrupoTotens.php',
 		data : {
-			acao : 'Altera_Toten'
+			acao : 'Altera_GrupoTotens'
 		},
 		dataType : 'json',
 		success : function(data) {
 			if (data['cod_error'] == 0) {
 				limpacampos();
-				$('#ModalIncluirToten').modal('hide');
-				Busca_Toten();
+				$('#ModalEditarGrupoToten').modal('hide');
+				Busca_GrupoToten();
 				msgalerta("",data['msg'],"success")
 			}else{
 				msgalerta("Atenção",data['msg'],"warning")

@@ -71,26 +71,20 @@ switch ($acao) {
     case 'Altera_GrupoTotens':
 
         // Filtra os dados e armazena em vari�veis (o filtro padr�o � FILTER_SANITIZE_STRING que remove tags HTML)
-        $idToten = $_POST['atxt_idToten'];
-        $email = $_POST['atxt_email'];
-        $login = $_POST['atxt_login'];
-        $senha = password_hash($_POST['atxt_senha'], PASSWORD_DEFAULT);
-        $tipo = $_POST['atxt_tipo'];
+        $idgrupototens = $_POST['atxt_idgrupototens'];
+        $nomegrupo = $_POST['atxt_nomegrupototens'];
+      
 
+        if (!empty($nomegrupo)) {
 
-        if ((!empty($login)) && (!empty($email)) && (!empty($email))) {
-
-            $sql_update = "UPDATE  totens SET login = :login ,email = :email , WHERE id = :idToten";
+            $sql_update = "UPDATE  grupototens SET nomegrupo = :nomegrupo WHERE idgrupototens = :idgrupototens";
 
             // Prepara uma senten�a para ser executada
             $statement = $pdo->prepare($sql_update);
 
-            $statement->bindParam(':idToten', $idToten);
-            $statement->bindParam(':nome', $Nome);
-            $statement->bindParam(':login', $Login);
-            $statement->bindParam(':celular',  $Celular);
-            $statement->bindParam(':email',  $email);
-
+            $statement->bindParam(':idgrupototens', $idgrupototens);
+            $statement->bindParam(':nomegrupo', $nomegrupo);
+          
 
             // Executa a senten�a j� com os valores
             if ($statement->execute()) {
@@ -179,16 +173,16 @@ switch ($acao) {
 
         break;
 
-    case 'Formulario_Toten':
+    case 'Formulario_GrupoToten':
 
-        $Toten = $_POST['txt_codigo'];
-        $stmt = $pdo->prepare('SELECT * FROM totens  WHERE totem_id = :Toten');
+        $Toten = $_POST['idgrupototen'];
+        $stmt = $pdo->prepare('SELECT * FROM grupototens  WHERE idgrupototens = :Toten');
         $stmt->bindParam(':Toten', $Toten);
         $executa = $stmt->execute();
 
         while ($linha = $stmt->fetch()) {
             $Toten = array(
-                'Codigo' => $linha['idgrupototens'], 'Nome' => $linha['nomegrupo']
+                'Codigo' => $linha['idgrupototens'], 'NomeGrupo' => $linha['nomegrupo']
             );
         }
         $Resultado['Html'] = $Toten;
